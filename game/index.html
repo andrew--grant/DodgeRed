@@ -4,30 +4,28 @@
     <meta charset="UTF-8">
     <title>My Phaser Demos</title>
     <script src="../lib/phaser.min.js"></script>
+    <script src="Configuration.js"></script>
     <script src="Disc.js"></script>
     <script src="PlayerDisc.js"></script>
     <script src="Grid.js"></script>
+    <script src="DiscManager.js"></script>
+    <script src="DiscGroup.js"></script>
     <script src="BackgroundGradient.js"></script>
 </head>
 <body>
 <script>
 
     var game = new Phaser.Game(800, 1500, Phaser.AUTO, '');
-
-    var config = {
-        game: game,
-        paths: {
-            disc: 'assets/disc.png',
-            grid: 'assets/grid.png'
-        }
-    };
+    var config = Configuration(game);
 
     var MainState = function () {
     };
-    var bmd;
+
     MainState.prototype = {
 
         preload: function () {
+            this.game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+            game.stage.backgroundColor = '0xffffff';
             game.load.image('disc', config.paths.disc);
             game.load.image('grid', config.paths.grid);
         },
@@ -37,11 +35,13 @@
             var bgGradient = new BackgroundGradient();
             bgGradient.add();
 
-            this.grid = new Grid(game.stage.width / 2, game.stage.height / 2, 'grid');
+            var grid = new Grid(game.stage.width / 2, game.stage.height / 2, 'grid');
+            grid.add();
 
             game.physics.startSystem(Phaser.Physics.ARCADE);
-            //game.stage.backgroundColor = '0x66ccff';
             new PlayerDisc(game.stage.width / 2, game.stage.height / 2, 'disc');
+
+            var dm = new DiscManager();
 
         },
 

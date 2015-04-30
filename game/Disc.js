@@ -1,66 +1,45 @@
 'use strict';
 
-var Disc = function (x, y, key) {
-    Phaser.Sprite.call(this, config.game, x, y, key);
-    this.game = config.game;
-    game.add.existing(this);
-    //game.physics.enable(this, Phaser.Physics.ARCADE);
+var Disc = function (game, x, y) {
+    Phaser.Sprite.call(this, game, x, y, 'disc');
+    this.game = game;
     this.anchor.setTo(0.5, 0.5);
+    this.checkWorldBounds = true;
+    this.outOfBoundsKill = true;
 
-    // cannot move if trying to
-    // go out of the grid area
-    //this.canMove = true;
+    this.events.onOutOfBounds.add(this.destroy, this);
 
-    var self = this;
-    this.game.input.keyboard.onDownCallback = function (e) {
-        self.move(e.keyCode, self);
-    }
-
+    this.num = -1;
+    this.lastUsed = 0;
+    this.startTrailLoop();
 
 };
 
 Disc.prototype = Object.create(Phaser.Sprite.prototype);
+
 Disc.prototype.constructor = Disc;
-
-Disc.prototype.create = function () {
-
-
-};
 
 Disc.prototype.update = function () {
 
-};
-
-Disc.prototype.move = function (direction, spriteRef) {
-
-    // http://phaser.io/docs/2.3.0/Phaser.Easing.html
-
-    var moveDistance = 100;
-
-    switch (direction) {
-        case 37: //"left"
-            var tween1 = game.add.tween(spriteRef);
-            tween1.to({x: 400}, 250).onComplete.add(function () {
-                console.log("onComplete");
-            });
-            tween1.easing(Phaser.Easing.Bounce.Out)
-            tween1.start();
-            break;
-        case 39 : // "right"
-            console.log("direction right " + spriteRef.x);
-            var tween1 = game.add.tween(spriteRef);
-            tween1.to({x: 500}, 250).onComplete.add(function () {
-                console.log("onComplete");
-            });
-            tween1.easing(Phaser.Easing.Bounce.Out)
-            tween1.start();
-            break;
-        case 38: // "up"
-            console.log("direction up");
-            break;
-        case 40 : // "down"
-            console.log("direction down");
-            break;
+    if (this.num % 2 == 0 && this.num != this.lastUsed) {
+        this.lastUsed = this.num;
+        var trailSprite = this.game.add.sprite(this.x, this.y, 'disc');
+        trailSprite.anchor.setTo(0.5, 0.5);
+        trailSprite.scale.setTo(.2);
+        trailSprite.alpha = .2;
+        this.game.add.tween(trailSprite)
+            .to({alpha: 0}, 1400, Phaser.Easing.Linear.None, true);
     }
+}
 
-};
+Disc.prototype.startTrailLoop = function () {
+    //this.num = -1;
+    this.timerLoop = this.game.time.events.loop(75, function () {
+        this.num++;
+    }, this);
+}
+
+Disc.prototype.destroy = function () {
+    //this.game.time.events.remove(this.timerLoop);
+    console.log("been killed");
+}
