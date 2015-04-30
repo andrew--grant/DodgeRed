@@ -7,6 +7,7 @@
     <script src="Disc.js"></script>
     <script src="PlayerDisc.js"></script>
     <script src="Grid.js"></script>
+    <script src="BackgroundGradient.js"></script>
 </head>
 <body>
 <script>
@@ -33,10 +34,13 @@
 
         create: function () {
 
+            var bgGradient = new BackgroundGradient();
+            bgGradient.add();
+
             this.grid = new Grid(game.stage.width / 2, game.stage.height / 2, 'grid');
 
             game.physics.startSystem(Phaser.Physics.ARCADE);
-            game.stage.backgroundColor = '0xebebeb';
+            //game.stage.backgroundColor = '0x66ccff';
             new PlayerDisc(game.stage.width / 2, game.stage.height / 2, 'disc');
 
         },
