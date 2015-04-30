@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="974c69b9-94b7-48b8-91a7-7a792198f905" name="Default" comment="A working grid and associated assets">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/game/assets/grid.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assets/grid.psd" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/game/Grid.js" />
+    <list default="true" id="974c69b9-94b7-48b8-91a7-7a792198f905" name="Default" comment="cosmetic changes to grid psd file">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/game/assets/grid.png" afterPath="$PROJECT_DIR$/game/assets/grid.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/grid.psd" afterPath="$PROJECT_DIR$/assets/grid.psd" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/game/index.html" afterPath="$PROJECT_DIR$/game/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -30,8 +29,8 @@
       <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/game/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="1.038961">
-              <caret line="40" column="0" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
+            <state vertical-scroll-proportion="1.0113636">
+              <caret line="39" column="12" selection-start-line="39" selection-start-column="12" selection-end-line="39" selection-end-column="12" />
               <folding />
             </state>
           </provider>
@@ -133,7 +132,7 @@
   <component name="PropertiesComponent">
     <property name="settings.editor.selected.configurable" value="configurable.group.appearance" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../www-master" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="HbShouldOpenHtmlAsHb" value="" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth0" value="216" />
@@ -203,6 +202,13 @@
       <option name="number" value="Default" />
       <updated>1430361814459</updated>
     </task>
+    <task id="LOCAL-00001" summary="A working grid and associated assets">
+      <created>1430369275193</created>
+      <option name="number" value="00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1430369275193</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -234,7 +240,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="A working grid and associated assets" />
-    <option name="LAST_COMMIT_MESSAGE" value="A working grid and associated assets" />
+    <MESSAGE value="cosmetic changes to grid psd file" />
+    <option name="LAST_COMMIT_MESSAGE" value="cosmetic changes to grid psd file" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -259,8 +266,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/game/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.038961">
-          <caret line="40" column="0" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
+        <state vertical-scroll-proportion="1.0113636">
+          <caret line="39" column="12" selection-start-line="39" selection-start-column="12" selection-end-line="39" selection-end-column="12" />
           <folding />
         </state>
       </provider>
