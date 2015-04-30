@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>My Phaser Demos</title>
+    <script src="../lib/phaser.min.js"></script>
+    <script src="Disc.js"></script>
+    <script src="PlayerDisc.js"></script>
+</head>
+<body>
+<script>
+
+    var game = new Phaser.Game(800, 1500, Phaser.AUTO, '');
+
+    var config = {
+        game: game,
+        paths: {disc: 'assets/disc.png'}
+    }
+
+    var MainState = function () {
+    };
+    var bmd;
+    MainState.prototype = {
+
+        preload: function () {
+            game.load.image('disc', config.paths.disc);
+        },
+
+        create: function () {
+
+            game.physics.startSystem(Phaser.Physics.ARCADE);
+            game.stage.backgroundColor = '#eee';
+            this.playerDisc = new PlayerDisc(game.stage.width / 2, game.stage.height / 2, 'disc');
+
+
+        },
+
+        update: function () {
+        }
+
+    };
+
+    config.game.state.add('MainState', MainState, true);
+
+</script>
+</body>
+</html>
