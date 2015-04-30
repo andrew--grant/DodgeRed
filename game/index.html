@@ -6,6 +6,7 @@
     <script src="../lib/phaser.min.js"></script>
     <script src="Disc.js"></script>
     <script src="PlayerDisc.js"></script>
+    <script src="Grid.js"></script>
 </head>
 <body>
 <script>
@@ -14,8 +15,11 @@
 
     var config = {
         game: game,
-        paths: {disc: 'assets/disc.png'}
-    }
+        paths: {
+            disc: 'assets/disc.png',
+            grid: 'assets/grid.png'
+        }
+    };
 
     var MainState = function () {
     };
@@ -24,14 +28,16 @@
 
         preload: function () {
             game.load.image('disc', config.paths.disc);
+            game.load.image('grid', config.paths.grid);
         },
 
         create: function () {
 
+            this.grid = new Grid(game.stage.width / 2, game.stage.height / 2, 'grid');
+
             game.physics.startSystem(Phaser.Physics.ARCADE);
             game.stage.backgroundColor = '#eee';
             this.playerDisc = new PlayerDisc(game.stage.width / 2, game.stage.height / 2, 'disc');
-
 
         },
 
