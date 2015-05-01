@@ -10,6 +10,7 @@
     <script src="TrailManager.js"></script>
     <script src="Trail.js"></script>
     <script src="Grid.js"></script>
+    <script src="Collect.js"></script>
     <script src="DiscManager.js"></script>
     <script src="BackgroundGradient.js"></script>
 </head>
@@ -32,10 +33,11 @@
             game.load.image(config.sprites.disc.key, config.sprites.disc.path);
             game.load.image(config.sprites.grid.key, config.sprites.grid.path);
             game.load.image(config.sprites.trail.key, config.sprites.trail.path);
+            game.load.image(config.sprites.collect.key, config.sprites.collect.path);
         },
 
         create: function () {
-            // game.time.advancedTiming = true;
+              game.time.advancedTiming = true;
 
             var bgGradient = new BackgroundGradient();
             bgGradient.add();
@@ -45,14 +47,14 @@
 
             game.physics.startSystem(Phaser.Physics.ARCADE);
             new PlayerDisc(game.stage.width / 2, game.stage.height / 2);
-
+            var collect = new Collect((game.stage.width / 2) + 100, game.stage.height / 2);
             discManager = new DiscManager();
             discManager.startAttacking();
 
         },
 
         update: function () {
-            // console.log("game.time.fps: " + game.time.fps);
+             console.log("game.time.fps: " + game.time.fps);
         }
 
     };

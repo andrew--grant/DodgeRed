@@ -13,8 +13,9 @@ TrailManager.prototype.add = function (x, y) {
     trailSprite.alpha = .2;
     var tween = this.game.add.tween(trailSprite)
         .to({alpha: 0}, 1400, Phaser.Easing.Linear.None, true);
-    tween.onComplete.add(function(){trailSprite.exists = false;}, this)
-    console.log("this.trailGroup.total = " + this.trailGroup.total);
+    tween.onComplete.add(function () {
+        trailSprite.exists = false;
+    }, this);
 };
 
 TrailManager.prototype.getFromGroup = function () {
@@ -22,9 +23,7 @@ TrailManager.prototype.getFromGroup = function () {
     if (trail == null) {
         trail = new Trail(this.game, -100, -100);
         this.trailGroup.add(trail);
-        console.log("created a Trail xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
         return trail;
     }
-    console.log("recycled a Trail");
     return trail;
 };

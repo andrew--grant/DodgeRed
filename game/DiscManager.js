@@ -19,7 +19,7 @@ DiscManager.prototype.startAttacking = function () {
         disc.exists = true;
         this.game.physics.arcade.enable(disc);
         disc.body.velocity.y = 400;
-        disc.tint = config.colors.discTint;
+        //disc.tint = config.colors.discTint;
         disc.x = this.game.width / 2;
         disc.y = -50;
     }, this);

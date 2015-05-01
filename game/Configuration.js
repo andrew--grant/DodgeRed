@@ -17,6 +17,10 @@ var Configuration = function (game) {
             trail: {
                 key: 'trail',
                 path: 'assets/trail.png'
+            },
+            collect: {
+                key: 'collect',
+                path: 'assets/collect.png'
             }
         },
         colors: {
