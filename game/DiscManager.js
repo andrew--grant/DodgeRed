@@ -1,6 +1,7 @@
 var DiscManager = function () {
     this.game = config.game;
     this.discGroup = this.game.add.group();
+    this.trailManager = new TrailManager();
     this.padding = 20;//-155;
     this.colWidth = 155 + this.padding;
     this.yCenter = this.game.height / 2;
@@ -17,18 +18,17 @@ DiscManager.prototype.startAttacking = function () {
         this.game.physics.arcade.enable(disc);
         disc.exists = true;
         this.game.physics.arcade.enable(disc);
-        disc.body.velocity.y = 500;
+        disc.body.velocity.y = 400;
         disc.tint = config.colors.discTint;
         disc.x = this.game.width / 2;
         disc.y = -50;
-        disc.body.velocity.y = 500;
     }, this);
 };
 
 DiscManager.prototype.getFromGroup = function () {
     var disc = this.discGroup.getFirstExists(false);
-    if(disc === null){
-        disc = new Disc(this.game, -100, -100);
+    if (disc === null) {
+        disc = new Disc(this.game, -100, -100, this.trailManager);
         this.discGroup.add(disc);
         return disc;
     }

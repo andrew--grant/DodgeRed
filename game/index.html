@@ -28,21 +28,24 @@
         preload: function () {
             this.game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
             game.stage.backgroundColor = config.colors.backgroundColor;
-            game.load.image('disc', config.paths.disc);
-            game.load.image('grid', config.paths.grid);
-            game.load.image('trail', config.paths.trail);
+            game.load.image(config.sprites.playerDisc.key, config.sprites.playerDisc.path);
+            game.load.image(config.sprites.disc.key, config.sprites.disc.path);
+            game.load.image(config.sprites.grid.key, config.sprites.grid.path);
+            game.load.image(config.sprites.trail.key, config.sprites.trail.path);
         },
 
         create: function () {
             // game.time.advancedTiming = true;
+
             var bgGradient = new BackgroundGradient();
             bgGradient.add();
 
-            var grid = new Grid(game.stage.width / 2, game.stage.height / 2, 'grid');
+            var grid = new Grid(game.stage.width / 2, game.stage.height / 2);
             grid.add();
 
             game.physics.startSystem(Phaser.Physics.ARCADE);
-            new PlayerDisc(game.stage.width / 2, game.stage.height / 2, 'disc');
+            new PlayerDisc(game.stage.width / 2, game.stage.height / 2);
+
             discManager = new DiscManager();
             discManager.startAttacking();
 

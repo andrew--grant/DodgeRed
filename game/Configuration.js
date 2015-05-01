@@ -1,14 +1,26 @@
 var Configuration = function (game) {
     return {
         game: game,
-        paths: {
-            disc: 'assets/disc.png',
-            grid: 'assets/grid.png',
-            trail: 'assets/trail.png'
+        sprites: {
+            playerDisc: {
+                key: 'playerDisc',
+                path: 'assets/player-disc.png'
+            },
+            disc: {
+                key: 'disc',
+                path: 'assets/disc.png'
+            },
+            grid: {
+                key: 'grid',
+                path: 'assets/grid.png'
+            },
+            trail: {
+                key: 'trail',
+                path: 'assets/trail.png'
+            }
         },
         colors: {
-            backgroundColor: 0xffffff,
-            discTint: 0x222222
+            backgroundColor: 0xffffff
         },
         totalDiscSprites: 35
     };
