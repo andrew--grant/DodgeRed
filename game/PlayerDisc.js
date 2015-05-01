@@ -5,9 +5,8 @@ var PlayerDisc = function (x, y, key) {
     Phaser.Sprite.call(this, config.game, x, y, key);
     this.game = config.game;
     game.add.existing(this);
-    //game.physics.enable(this, Phaser.Physics.ARCADE);
     this.anchor.setTo(0.5, 0.5);
-
+    this.scale.set(.8,.8);
     this.inputDisabled = false;
 
     var self = this;
@@ -27,10 +26,10 @@ PlayerDisc.prototype.doTween = function (spriteRef, tweenProps) {
         moveTween.to(tweenProps, 200).onComplete.add(function () {
             self.inputDisabled = false;
         });
-        moveTween.easing(Phaser.Easing.Back.Out)
+        moveTween.easing(Phaser.Easing.Back.Out);
         moveTween.start();
     }
-}
+};
 
 PlayerDisc.prototype.move = function (key, spriteRef) {
     var moveDist = 100;

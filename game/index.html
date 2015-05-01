@@ -7,9 +7,10 @@
     <script src="Configuration.js"></script>
     <script src="Disc.js"></script>
     <script src="PlayerDisc.js"></script>
+    <script src="TrailManager.js"></script>
+    <script src="Trail.js"></script>
     <script src="Grid.js"></script>
     <script src="DiscManager.js"></script>
-    <script src="DiscGroup.js"></script>
     <script src="BackgroundGradient.js"></script>
 </head>
 <body>
@@ -17,6 +18,7 @@
 
     var game = new Phaser.Game(800, 1500, Phaser.AUTO, '');
     var config = Configuration(game);
+    var discManager;
 
     var MainState = function () {
     };
@@ -25,13 +27,14 @@
 
         preload: function () {
             this.game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
-            game.stage.backgroundColor = '0xffffff';
+            game.stage.backgroundColor = config.colors.backgroundColor;
             game.load.image('disc', config.paths.disc);
             game.load.image('grid', config.paths.grid);
+            game.load.image('trail', config.paths.trail);
         },
 
         create: function () {
-
+            // game.time.advancedTiming = true;
             var bgGradient = new BackgroundGradient();
             bgGradient.add();
 
@@ -40,12 +43,13 @@
 
             game.physics.startSystem(Phaser.Physics.ARCADE);
             new PlayerDisc(game.stage.width / 2, game.stage.height / 2, 'disc');
-
-            var dm = new DiscManager();
+            discManager = new DiscManager();
+            discManager.startAttacking();
 
         },
 
         update: function () {
+            // console.log("game.time.fps: " + game.time.fps);
         }
 
     };
