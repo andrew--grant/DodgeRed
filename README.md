@@ -1,4 +1,4 @@
 # Smover
 ##Phaser HTML5 game
 
-Dodge the red discs, stay alive, win. 
+Dodge the discs, stay alive, win. 
