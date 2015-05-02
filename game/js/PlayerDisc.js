@@ -1,14 +1,12 @@
 'use strict';
 
 var PlayerDisc = function (x, y) {
-
     Phaser.Sprite.call(this, config.game, x, y, config.sprites.playerDisc.key);
     this.game = config.game;
     game.add.existing(this);
     this.anchor.setTo(0.5, 0.5);
     this.scale.set(.8, .8);
     this.inputDisabled = false;
-
     var self = this;
     this.game.input.keyboard.onDownCallback = function (e) {
         self.move(e, self);

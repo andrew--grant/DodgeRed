@@ -1,7 +1,6 @@
 var TrailManager = function () {
     this.game = config.game;
     this.trailGroup = this.game.add.group();
-    console.log("inside TrailManager constructor");
 };
 
 TrailManager.prototype.add = function (x, y) {

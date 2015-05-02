@@ -1,7 +1,7 @@
 var DiscManager = function () {
     this.game = config.game;
     this.discGroup = this.game.add.group();
-    this.trailManager = new TrailManager();
+    this.trailManager = new TrailManager();// todo: one only, make singleton access?
     this.padding = 20;//-155;
     this.colWidth = 155 + this.padding;
     this.yCenter = this.game.height / 2;
