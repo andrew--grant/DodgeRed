@@ -1,20 +1,32 @@
-var CollectManager = function () {
+var CollectManager = function (playerDisc) {
     this.game = config.game;
+    this.playerDisc = playerDisc;
+    this.waitTime = 3000;
 };
 
-CollectManager.prototype.startAttacking = function () {
-    this.game.time.events.loop(2000, function () {
-        var disc = this.getFromGroup();
-        this.game.physics.arcade.enable(disc);
-        disc.exists = true;
-        this.game.physics.arcade.enable(disc);
-        disc.body.velocity.y = 400;
-        //disc.tint = config.colors.discTint;
-        disc.x = this.game.width / 2;
-        disc.y = -50;
+CollectManager.prototype.getRandomPosition = function () {
+    var centerx = this.game.width / 2;
+    var centery = this.game.height / 2;
+    var gridSpawnLocations =
+        [
+            [centerx - 100, centery - 100],
+            [centerx, centery - 100],
+            [centerx + 100, centery - 100],
+            [centerx - 100, centery],
+            [centerx, centery],
+            [centerx + 100, centery],
+            [centerx - 100, centery + 100],
+            [centerx, centery + 100],
+            [centerx + 100, centery + 100]
+        ];
+    return config.gridSpawnLocations[game.rnd.integerInRange(0, 8)]
+};
+
+CollectManager.prototype.start = function () {
+    //todo: on a timer, or there till collected?
+    this.game.time.events.loop(this.waitTime, function () {
+        var pos = this.getRandomPosition();
+        new Collect(pos[0], pos[1], this.playerDisc);
     }, this);
 };
 
-CollectManager.prototype.spawn = function () {
-
-};

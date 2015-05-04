@@ -1,8 +1,11 @@
 'use strict';
 
-var Disc = function (game, x, y, trailManager) {
+var Disc = function (game, x, y, trailManager, playerDisc) {
     Phaser.Sprite.call(this, game, x, y, config.sprites.disc.key);
+    this.game.physics.arcade.enable(this);
+    this.playerDisc = playerDisc;
     this.trailManager = trailManager;
+    this.playerDisc = playerDisc;
     this.game = game;
     this.startTrailCounterLoop();
     this.anchor.setTo(0.5, 0.5);
@@ -20,10 +23,13 @@ Disc.prototype.update = function () {
         this.trailManager.add(this.x, this.y);
         this.lastUsed = this.num;
     }
+    this.game.physics.arcade.overlap(this, this.playerDisc, function () {
+        console.log("player disc to disc overlap");
+    });
 };
 
 Disc.prototype.startTrailCounterLoop = function () {
     this.timerLoop = this.game.time.events.loop(50, function () {
-        this.num += 1 ;
+        this.num += 1;
     }, this);
 };

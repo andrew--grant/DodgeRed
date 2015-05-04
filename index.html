@@ -22,7 +22,7 @@
     // http://www.addlime.com/blog/exploding-sprites-phaser-js-shatter-js/
     // http://morgandemilly.com/blog/2015/04/phaserjs-cocoonjs-tips-tricks/
     var game = new Phaser.Game(1242, 2208, Phaser.AUTO, '');
-    var config = Configuration(game);
+    var config;
     var discManager;
 
     var MainState = function () {
@@ -30,6 +30,7 @@
 
     MainState.prototype = {
         preload: function () {
+            config = Configuration(game);
             this.game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
             game.stage.backgroundColor = config.colors.backgroundColor;
             game.load.image(config.sprites.playerDisc.key, config.sprites.playerDisc.path);
@@ -51,10 +52,10 @@
             bgGradient.add();
             var grid = new Grid(game.stage.width / 2, game.stage.height / 2);
             grid.add();
-            new PlayerDisc(game.stage.width / 2, game.stage.height / 2);
-            var collect = new Collect((game.stage.width / 2) + 100, game.stage.height / 2);
-            discManager = new DiscManager();
+            var playerDisc = new PlayerDisc(game.stage.width / 2, game.stage.height / 2);
+            discManager = new DiscManager(playerDisc);
             discManager.startAttacking();
+            new CollectManager(playerDisc).start();
         },
 
         update: function () {
@@ -63,7 +64,7 @@
 
     };
 
-    config.game.state.add('MainState', MainState, true);
+    game.state.add('MainState', MainState, true);
 
 </script>
 </body>
