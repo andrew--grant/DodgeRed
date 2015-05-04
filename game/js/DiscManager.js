@@ -1,7 +1,7 @@
 var DiscManager = function () {
     this.game = config.game;
     this.discGroup = this.game.add.group();
-    this.trailManager = new TrailManager();
+    this.trailManager = new TrailManager();// todo: one only, make singleton access?
     this.padding = 20;//-155;
     this.colWidth = 155 + this.padding;
     this.yCenter = this.game.height / 2;
@@ -19,7 +19,7 @@ DiscManager.prototype.startAttacking = function () {
         disc.exists = true;
         this.game.physics.arcade.enable(disc);
         disc.body.velocity.y = 400;
-        disc.tint = config.colors.discTint;
+        //disc.tint = config.colors.discTint;
         disc.x = this.game.width / 2;
         disc.y = -50;
     }, this);
