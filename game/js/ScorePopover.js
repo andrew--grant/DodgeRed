@@ -23,7 +23,7 @@ ScorePopover.prototype.popInOut = function (pointsEarned, x, y) {
         self.executingPopover = true;
         var tween = game.add.tween(this)
             .to({y: this.y - 30}, 250, "Linear", false)
-            .to({alpha: 0}, 150, "Linear", false).start();
+            .to({alpha: 0}, 350, "Linear", false).start();
         tween.onComplete.add(function () {
             console.log("cb ran");
             self.executingPopover = false;
