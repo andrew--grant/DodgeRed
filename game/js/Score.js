@@ -6,7 +6,7 @@ var Score = function () {
     this.currentScore = 0;
     this.scoreLabel = "Score: ";
     Phaser.Text.call(this, config.game, 50, 100, this.scoreLabel + " " + this.currentScore,
-        {font: "65px Arial", fill: "#4422ff", align: "center"});
+        {font: "65px Arial", fill: "#fff200", align: "center"});
     game.add.existing(this);
 };
 

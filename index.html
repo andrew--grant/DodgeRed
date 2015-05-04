@@ -14,6 +14,8 @@
     <script src="game/js/CollectManager.js"></script>
     <script src="game/js/DiscManager.js"></script>
     <script src="game/js/BackgroundGradient.js"></script>
+    <script src="game/js/Score.js"></script>
+    <script src="game/js/ScorePopover.js"></script>
 </head>
 <body>
 <script>
@@ -56,6 +58,9 @@
             discManager = new DiscManager(playerDisc);
             discManager.startAttacking();
             new CollectManager(playerDisc).start();
+
+            //var score = new Score();
+
         },
 
         update: function () {
