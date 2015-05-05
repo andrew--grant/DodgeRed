@@ -21,7 +21,7 @@ var Configuration = function (game) {
             },
             collect: {
                 key: 'collect',
-                path: 'game/assets/collect.png'
+                path: 'game/assets/collect-spritesheet.png'
             }
         },
         colors: {
