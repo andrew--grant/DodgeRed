@@ -33,6 +33,7 @@
     MainState.prototype = {
         preload: function () {
             config = Configuration(game);
+            //todo: add below back in!!!
             this.game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
             game.stage.backgroundColor = config.colors.backgroundColor;
             game.load.image(config.sprites.playerDisc.key, config.sprites.playerDisc.path);
@@ -40,7 +41,7 @@
             game.load.image(config.sprites.grid.key, config.sprites.grid.path);
             game.load.image(config.sprites.trail.key, config.sprites.trail.path);
             game.load.image(config.sprites.collect.key, config.sprites.collect.path);
-            game.load.spritesheet(config.sprites.collect.key, config.sprites.collect.path, 100, 100, 4);
+            game.load.spritesheet(config.sprites.collect.key, config.sprites.collect.path, 100, 100);
 //            var hammer = new Hammer(this.game.canvas);
 //            hammer.get('pan').set({direction: Hammer.DIRECTION_ALL});
 //            hammer.on("swipeleft swiperight swipeup swipedown", function (ev) {
