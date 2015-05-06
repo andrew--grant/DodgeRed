@@ -15,7 +15,8 @@
     <script src="game/js/DiscManager.js"></script>
     <script src="game/js/BackgroundGradient.js"></script>
     <script src="game/js/Score.js"></script>
-    <script src="game/js/ScorePopover.js"></script>
+    <script src="game/js/Best.js"></script>
+    <script src="game/js/CollectAnimations.js"></script>
 </head>
 <body>
 <script>
@@ -27,20 +28,31 @@
     var config;
     var discManager;
 
+    WebFontConfig = {
+        custom: {
+            families: ['Revalia'],
+            urls: ['game/assets/fonts.css']
+        }
+    };
+
     var MainState = function () {
     };
 
     MainState.prototype = {
         preload: function () {
+
+            //todo: dedicated preloader to hen move to main state
             config = Configuration(game);
-            //todo: add below back in!!!
+
+            //  Load the Google WebFont Loader script
+            game.load.script('webfont', 'lib/webfontloader.js');
+
             this.game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
             game.stage.backgroundColor = config.colors.backgroundColor;
             game.load.image(config.sprites.playerDisc.key, config.sprites.playerDisc.path);
             game.load.image(config.sprites.disc.key, config.sprites.disc.path);
             game.load.image(config.sprites.grid.key, config.sprites.grid.path);
             game.load.image(config.sprites.trail.key, config.sprites.trail.path);
-            game.load.image(config.sprites.collect.key, config.sprites.collect.path);
             game.load.spritesheet(config.sprites.collect.key, config.sprites.collect.path, 100, 100);
 //            var hammer = new Hammer(this.game.canvas);
 //            hammer.get('pan').set({direction: Hammer.DIRECTION_ALL});
@@ -61,7 +73,8 @@
             discManager.startAttacking();
             new CollectManager(playerDisc).start();
 
-            //var score = new Score();
+            var score = new Score();
+            var best = new Best();
 
         },
 

@@ -9,7 +9,7 @@ var Collect = function (x, y, playerDisc) {
     game.add.existing(this);
     this.anchor.setTo(0.5, 0.5);
     this.animations.add('collectanim', [1, 2, 3, 4]);
-    this.scorePopover = new ScorePopover();
+    this.collectAnimations = new CollectAnimations();
 
     // todo: remove collect from game when hit
 };
@@ -24,10 +24,7 @@ Collect.prototype.update = function (spriteRef, tweenProps) {
         this.scale.setTo(this.scale.x + .2, this.scale.y + .2);
     }
     this.game.physics.arcade.overlap(this, this.playerDisc, function () {
-        self.scorePopover.popInOut(3, self.x, self.y);
-        self.play('collectanim', 20, false,false);
-
-        //self.exists = false; //todo: check impact on recycling
+        self.collectAnimations.showPointsAndAnimate(3, self);
     });
 };
 
