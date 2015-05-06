@@ -1,8 +1,9 @@
 'use strict';
 
-var PlayerDisc = function (x, y) {
+var PlayerDisc = function (x, y, score) {
     Phaser.Sprite.call(this, config.game, x, y, config.sprites.playerDisc.key);
     this.game.physics.arcade.enable(this);
+    this.score = score;
     //this.body.immovable = true;
     this.game = config.game;
     game.add.existing(this);
@@ -23,8 +24,6 @@ PlayerDisc.prototype = Object.create(Phaser.Sprite.prototype);
 PlayerDisc.prototype.constructor = PlayerDisc;
 
 PlayerDisc.prototype.update = function () {
-    // todo: test for collisions here
-    // (should work now physics enabled!)
 };
 
 PlayerDisc.prototype.doTween = function (spriteRef, tweenProps) {

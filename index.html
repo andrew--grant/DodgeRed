@@ -16,7 +16,7 @@
     <script src="game/js/BackgroundGradient.js"></script>
     <script src="game/js/Score.js"></script>
     <script src="game/js/Best.js"></script>
-    <script src="game/js/CollectAnimations.js"></script>
+    <script src="game/js/CollectActions.js"></script>
 </head>
 <body>
 <script>
@@ -68,12 +68,13 @@
             bgGradient.add();
             var grid = new Grid(game.stage.width / 2, game.stage.height / 2);
             grid.add();
-            var playerDisc = new PlayerDisc(game.stage.width / 2, game.stage.height / 2);
+            var score = new Score();
+            var playerDisc = new PlayerDisc(game.stage.width / 2, game.stage.height / 2, score);
             discManager = new DiscManager(playerDisc);
             discManager.startAttacking();
             new CollectManager(playerDisc).start();
 
-            var score = new Score();
+
             var best = new Best();
 
         },

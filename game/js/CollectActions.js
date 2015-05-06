@@ -1,6 +1,6 @@
 'use strict';
 
-var CollectAnimations = function () {
+var CollectActions = function () {
     // http://support.ludei.com/hc/communities/public/questions/200706898-Problem-with-custom-fonts
     // http://blog.ludei.com/managing-fonts-in-cocoonjs-1-3/
     Phaser.Text.call(this, config.game, 250, 400, "",
@@ -8,13 +8,12 @@ var CollectAnimations = function () {
     this.anchor.setTo(0.5, 0.5);
     game.add.existing(this);
     this.executingPopover = false;
-    // todo: combine with score obj and use aggregation instead of inheritance?
 };
 
-CollectAnimations.prototype = Object.create(Phaser.Text.prototype);
-CollectAnimations.prototype.constructor = CollectAnimations;
+CollectActions.prototype = Object.create(Phaser.Text.prototype);
+CollectActions.prototype.constructor = CollectActions;
 
-CollectAnimations.prototype.showPointsAndAnimate = function (pointsEarned, collectObj) {
+CollectActions.prototype.showPointsAndAnimate = function (pointsEarned, collectObj, callback) {
     this.text = "+" + pointsEarned;
     this.x = collectObj.x;
     this.y = collectObj.y -50;
@@ -22,6 +21,7 @@ CollectAnimations.prototype.showPointsAndAnimate = function (pointsEarned, colle
     if(!self.executingPopover ){
         self.executingPopover = true;
         collectObj.play('collectanim', 20, false, true);
+        callback(pointsEarned);
         var tween = game.add.tween(this)
             .to({y: this.y - 30}, 250, "Linear", false)
             .to({alpha: 0}, 350, "Linear", false).start();
@@ -29,6 +29,5 @@ CollectAnimations.prototype.showPointsAndAnimate = function (pointsEarned, colle
             self.executingPopover = false;
         });
     }
-
 };
 
