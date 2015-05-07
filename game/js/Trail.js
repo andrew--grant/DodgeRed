@@ -7,7 +7,6 @@ var Trail = function (game, x, y) {
 };
 
 Trail.prototype = Object.create(Phaser.Sprite.prototype);
-
 Trail.prototype.constructor = Trail;
 
 Trail.prototype.update = function () {

@@ -1,5 +1,5 @@
-var TrailManager = function () {
-    this.game = config.game;
+var TrailManager = function (game) {
+    this.game = game;
     this.trailGroup = this.game.add.group();
 };
 

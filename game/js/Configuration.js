@@ -1,7 +1,6 @@
 var Configuration = function (game) {
-    console.log(game);
+    this.game = game;
     return {
-        game: game,
         sprites: {
             playerDisc: {
                 key: 'playerDisc',
@@ -28,15 +27,15 @@ var Configuration = function (game) {
             backgroundColor: 0xffffff
         },
         gridSpawnLocations: [
-            [game.width / 2 - 100, game.height / 2 - 100],
-            [game.width / 2, game.height / 2 - 100],
-            [game.width / 2 + 100, game.height / 2 - 100],
-            [game.width / 2 - 100, game.height / 2],
-            [game.width / 2, game.height / 2],
-            [game.width / 2 + 100, game.height / 2],
-            [game.width / 2 - 100, game.height / 2 + 100],
-            [game.width / 2, game.height / 2 + 100],
-            [game.width / 2 + 100, game.height / 2 + 100]
+            [this.game.width / 2 - 100, this.game.height / 2 - 100],
+            [this.game.width / 2, this.game.height / 2 - 100],
+            [this.game.width / 2 + 100, this.game.height / 2 - 100],
+            [this.game.width / 2 - 100, this.game.height / 2],
+            [this.game.width / 2, game.height / 2],
+            [this.game.width / 2 + 100, this.game.height / 2],
+            [this.game.width / 2 - 100, this.game.height / 2 + 100],
+            [this.game.width / 2, this.game.height / 2 + 100],
+            [this.game.width / 2 + 100, this.game.height / 2 + 100]
         ]
     };
 };

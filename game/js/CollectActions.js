@@ -1,12 +1,11 @@
 'use strict';
 
-var CollectActions = function () {
-    // http://support.ludei.com/hc/communities/public/questions/200706898-Problem-with-custom-fonts
-    // http://blog.ludei.com/managing-fonts-in-cocoonjs-1-3/
-    Phaser.Text.call(this, config.game, 250, 400, "",
+var CollectActions = function (game) {
+    Phaser.Text.call(this, game, 250, 400, "",
         {font: "55px Revalia", fill: "#fff200", align: "center"});
+    this.game = game;
     this.anchor.setTo(0.5, 0.5);
-    game.add.existing(this);
+    this.game.add.existing(this);
     this.executingPopover = false;
 };
 
@@ -22,7 +21,7 @@ CollectActions.prototype.showPointsAndAnimate = function (pointsEarned, collectO
         self.executingPopover = true;
         collectObj.play('collectanim', 20, false, true);
         callback(pointsEarned);
-        var tween = game.add.tween(this)
+        var tween =  this.game.add.tween(this)
             .to({y: this.y - 30}, 250, "Linear", false)
             .to({alpha: 0}, 350, "Linear", false).start();
         tween.onComplete.add(function () {

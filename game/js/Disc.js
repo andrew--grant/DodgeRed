@@ -25,6 +25,7 @@ Disc.prototype.update = function () {
     }
     this.game.physics.arcade.overlap(this, this.playerDisc, function () {
         console.log("player disc to disc overlap");
+        alert("You lose!!");
         // todo: end game or decrease lives?
     });
 };

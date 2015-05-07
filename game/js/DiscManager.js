@@ -1,9 +1,9 @@
-var DiscManager = function (playerDisc) {
-    this.game = config.game;
+var DiscManager = function (playerDisc, game) {
+    this.game = game;
     this.playerDisc = playerDisc
     this.discGroup = this.game.add.group();
-    this.trailManager = new TrailManager();// todo: one only, make singleton access?
-    this.padding = 20;//-155;
+    this.trailManager = new TrailManager(game);// todo: one only, make singleton access?
+    this.padding = 20;
     this.colWidth = 155 + this.padding;
     this.yCenter = this.game.height / 2;
     this.yLeft = this.yCenter - this.colWidth;

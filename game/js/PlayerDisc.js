@@ -1,12 +1,11 @@
 'use strict';
 
-var PlayerDisc = function (x, y, score) {
-    Phaser.Sprite.call(this, config.game, x, y, config.sprites.playerDisc.key);
+var PlayerDisc = function (x, y, game, score) {
+    Phaser.Sprite.call(this, game, x, y, config.sprites.playerDisc.key);
+    this.game = game;
     this.game.physics.arcade.enable(this);
     this.score = score;
-    //this.body.immovable = true;
-    this.game = config.game;
-    game.add.existing(this);
+    this.game.add.existing(this);
     this.anchor.setTo(0.5, 0.5);
     this.scale.set(.8, .8);
     this.inputDisabled = false;
@@ -30,7 +29,7 @@ PlayerDisc.prototype.doTween = function (spriteRef, tweenProps) {
     var self = this;
     if (!self.inputDisabled) {
         self.inputDisabled = true;
-        var moveTween = game.add.tween(spriteRef);
+        var moveTween =  this.game.add.tween(spriteRef);
         moveTween.to(tweenProps, 200).onComplete.add(function () {
             self.inputDisabled = false;
         });
