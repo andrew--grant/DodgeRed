@@ -1,7 +1,7 @@
 'use strict';
 
 var Disc = function (game, x, y, trailManager, playerDisc) {
-    Phaser.Sprite.call(this, game, x, y, config.sprites.disc.key);
+    Phaser.Sprite.call(this, game, x, y, Main.Config.sprites.disc.key);
     this.game.physics.arcade.enable(this);
     this.playerDisc = playerDisc;
     this.trailManager = trailManager;

@@ -1,7 +1,7 @@
 'use strict';
 
 var PlayerDisc = function (x, y, game, score) {
-    Phaser.Sprite.call(this, game, x, y, config.sprites.playerDisc.key);
+    Phaser.Sprite.call(this, game, x, y, Main.Config.sprites.playerDisc.key);
     this.game = game;
     this.game.physics.arcade.enable(this);
     this.score = score;
@@ -9,10 +9,10 @@ var PlayerDisc = function (x, y, game, score) {
     this.anchor.setTo(0.5, 0.5);
     this.scale.set(.8, .8);
     this.inputDisabled = false;
-    this.leftMostMove = config.gridSpawnLocations[0][0];
-    this.rightMostMove = config.gridSpawnLocations[5][0];
-    this.topMostMove = config.gridSpawnLocations[0][1];
-    this.bottomMostMove = config.gridSpawnLocations[7][1];
+    this.leftMostMove = Main.Config.gridSpawnLocations[0][0];
+    this.rightMostMove = Main.Config.gridSpawnLocations[5][0];
+    this.topMostMove = Main.Config.gridSpawnLocations[0][1];
+    this.bottomMostMove = Main.Config.gridSpawnLocations[7][1];
     var self = this;
     this.game.input.keyboard.onDownCallback = function (e) {
         self.move(e, self);

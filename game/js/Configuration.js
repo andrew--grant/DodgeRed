@@ -21,6 +21,14 @@ var Configuration = function (game) {
             collect: {
                 key: 'collect',
                 path: 'game/assets/collect-spritesheet.png'
+            },
+            loadingBar : {
+                key: 'loadingBar',
+                path: 'game/assets/loading-bar.png'
+            },
+            loadingBackground : {
+                key: 'loadingBackground',
+                path: 'game/assets/loading-background.png'
             }
         },
         colors: {
@@ -31,7 +39,7 @@ var Configuration = function (game) {
             [this.game.width / 2, this.game.height / 2 - 100],
             [this.game.width / 2 + 100, this.game.height / 2 - 100],
             [this.game.width / 2 - 100, this.game.height / 2],
-            [this.game.width / 2, game.height / 2],
+            [this.game.width / 2, this.game.height / 2],
             [this.game.width / 2 + 100, this.game.height / 2],
             [this.game.width / 2 - 100, this.game.height / 2 + 100],
             [this.game.width / 2, this.game.height / 2 + 100],

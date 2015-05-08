@@ -2,34 +2,41 @@ var Main = {}
 
 Main.Boot = function (game) {
     this.game = game;
-    console.log("game: " + game);
 };
 
 Main.Boot.prototype = {
     preload: function () {
-        config = Configuration(this.game);// todo: attach this to Main, so we can do Main.Config
-        this.game.load.script('webfont', 'lib/webfontloader.js');
-        WebFontConfig = {
-            custom: {
-                families: ['Revalia'],
-                urls: ['game/assets/fonts.css']
-            }
-        };
-        this.game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
-        this.game.stage.backgroundColor = config.colors.backgroundColor;
-        this.game.load.image(config.sprites.playerDisc.key, config.sprites.playerDisc.path);
-        this.game.load.image(config.sprites.disc.key, config.sprites.disc.path);
-        this.game.load.image(config.sprites.grid.key, config.sprites.grid.path);
-        this.game.load.image(config.sprites.trail.key, config.sprites.trail.path);
-        this.game.load.spritesheet(config.sprites.collect.key, config.sprites.collect.path, 100, 100);
-//            var hammer = new Hammer(this.game.canvas);
-//            hammer.get('pan').set({direction: Hammer.DIRECTION_ALL});
-//            hammer.on("swipeleft swiperight swipeup swipedown", function (ev) {
-//                console.log("ev " + ev.type);
-//            });
+        Main.Config = Configuration(this.game);
+        this.load.image(Main.Config.sprites.loadingBar.key, Main.Config.sprites.loadingBar.path); // loading bar
+        this.load.image(Main.Config.sprites.loadingBackground.key, Main.Config.sprites.loadingBackground.path); // loading bg
+        // todo: swipe handling
+        //var hammer = new Hammer(this.game.canvas);
+        //hammer.get('pan').set({direction: Hammer.DIRECTION_ALL});
+        //hammer.on("swipeleft swiperight swipeup swipedown", function (ev) {
+        //    console.log("ev " + ev.type);
+        //});
     },
 
     create: function () {
-        this.game.state.start('game');
+        // Unless you specifically know your game needs
+        // to support multi-touch I would recommend setting this to 1
+        this.game.input.maxPointers = 1;
+        // Phaser will automatically pause if the browser tab the
+        // game is in loses focus. You can disable that here:
+        this.game.stage.disableVisibilityChange = true;
+        this.game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+        this.game.stage.backgroundColor = Main.Config.colors.backgroundColor;
+        if (this.game.device.desktop) {
+            // If you have any desktop specific settings, they can go in here
+            this.scale.pageAlignHorizontally = false;
+        }
+        else {
+            // Mobile settings
+            this.game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+            this.scale.forceLandscape = true;
+            this.scale.pageAlignHorizontally = true;
+        }
+        this.scale.setScreenSize(true);
+        this.state.start('preloader');
     }
 };

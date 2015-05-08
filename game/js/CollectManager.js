@@ -19,7 +19,7 @@ CollectManager.prototype.getRandomPosition = function () {
             [centerx, centery + 100],
             [centerx + 100, centery + 100]
         ];
-    return config.gridSpawnLocations[ this.game.rnd.integerInRange(0, 8)]
+    return Main.Config.gridSpawnLocations[ this.game.rnd.integerInRange(0, 8)]
 };
 
 CollectManager.prototype.start = function () {

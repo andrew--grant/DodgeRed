@@ -1,7 +1,7 @@
 'use strict';
 
 var Collect = function (x, y, playerDisc, game) {
-    Phaser.Sprite.call(this, game, x, y, config.sprites.collect.key, 0);
+    Phaser.Sprite.call(this, game, x, y, Main.Config.sprites.collect.key, 0);
     this.game = game;
     this.playerDisc = playerDisc;
     this.game.physics.arcade.enable(this);

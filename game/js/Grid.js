@@ -1,7 +1,7 @@
 'use strict';
 
 var Grid = function (x, y, game) {
-    Phaser.Sprite.call(this, game, x, y, config.sprites.grid.key);
+    Phaser.Sprite.call(this, game, x, y, Main.Config.sprites.grid.key);
     this.game = game;
     this.anchor.setTo(0.5, 0.5);
 };
