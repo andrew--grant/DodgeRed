@@ -5,23 +5,23 @@ Main.Preloader = function (game) {
 Main.Preloader.prototype = {
     preload: function () {
 
-        this.load.onLoadComplete.addOnce(function () {
-            this.ready = true;
-        }, this);
-        // load the loading screen sprites - a blank bar and a blue bar
-        this.bck = this.add.sprite(this.world.centerX, this.world.centerY, Main.Config.sprites.loadingBackground.key);
-        this.bck.anchor.setTo(0.5, 0.5);
-        //this.bck.scale.setTo(0.5, 0.5);
-        this.preloadBar = this.add.sprite(this.world.centerX, this.world.centerY, Main.Config.sprites.loadingBar.key);
-        //this.preloadBar.anchor.setTo(0, 0.5);
-        //this.preloadBar.scale.setTo(0.5, 1);
-        //this.preloadBar.x = this.world.centerX - this.preloadBar.width / 2;
 
-        // this statement sets the blue bar to represent
-        // the actual percentage of data loaded
-        this.load.setPreloadSprite(this.preloadBar, 0);
+    },
 
-        // load all the required assets in the game - sprites, music, fonts,etc
+    create: function () {
+        game.load.onLoadStart.add(this.loadStart, this);
+        game.load.onFileComplete.add(this.fileComplete, this);
+        game.load.onLoadComplete.add(this.loadComplete, this);
+        this.start();
+    },
+
+    start: function () {
+        this.game.load.image(Main.Config.sprites.playerDisc.key, Main.Config.sprites.playerDisc.path);
+        //this.game.load.image('block', 'http://localhost:8888/');
+        this.game.load.image(Main.Config.sprites.disc.key, Main.Config.sprites.disc.path);
+        this.game.load.image(Main.Config.sprites.grid.key, Main.Config.sprites.grid.path);
+        this.game.load.image(Main.Config.sprites.trail.key, Main.Config.sprites.trail.path);
+        this.game.load.spritesheet(Main.Config.sprites.collect.key, Main.Config.sprites.collect.path, 100, 100);
         this.game.load.script('webfont', 'lib/webfontloader.js');
         WebFontConfig = {
             custom: {
@@ -29,22 +29,20 @@ Main.Preloader.prototype = {
                 urls: ['game/assets/fonts.css']
             }
         };
-        this.game.load.image(Main.Config.sprites.playerDisc.key, Main.Config.sprites.playerDisc.path);
-        this.game.load.image(Main.Config.sprites.disc.key, Main.Config.sprites.disc.path);
-        this.game.load.image(Main.Config.sprites.grid.key, Main.Config.sprites.grid.path);
-        this.game.load.image(Main.Config.sprites.trail.key, Main.Config.sprites.trail.path);
-        this.game.load.image('dasd', 'http://www.charlesproxy.com/');
-        this.game.load.spritesheet(Main.Config.sprites.collect.key, Main.Config.sprites.collect.path, 100, 100);
-
+        this.game.load.start();
     },
 
-    update: function () {
-        //if (this.cache.isSoundDecoded('music') && this.ready == false) {
-        if (this.ready) {
-            this.state.start('game');
-        }
+    loadStart: function () {
+        console.log("loadStart");
+    },
 
+    fileComplete: function (progress, cacheKey, success, totalLoaded, totalFiles) {
+        console.log("File Complete: " + progress + "% - " + totalLoaded + " out of " + totalFiles + " status is " + success);
+    },
+
+    loadComplete: function () {
+        console.log("progress: " + this.game.load.progress);
+        this.state.start('game');
     }
-
 };
 

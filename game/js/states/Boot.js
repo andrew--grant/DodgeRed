@@ -7,8 +7,6 @@ Main.Boot = function (game) {
 Main.Boot.prototype = {
     preload: function () {
         Main.Config = Configuration(this.game);
-        this.load.image(Main.Config.sprites.loadingBar.key, Main.Config.sprites.loadingBar.path); // loading bar
-        this.load.image(Main.Config.sprites.loadingBackground.key, Main.Config.sprites.loadingBackground.path); // loading bg
         // todo: swipe handling
         //var hammer = new Hammer(this.game.canvas);
         //hammer.get('pan').set({direction: Hammer.DIRECTION_ALL});
