@@ -15,7 +15,8 @@ Main.Boot.prototype = {
         //});
     },
 
-    create: function () {
+    create: function () {   var bgGradient = new BackgroundGradient(this.game);
+        bgGradient.add();
         // Unless you specifically know your game needs
         // to support multi-touch I would recommend setting this to 1
         this.game.input.maxPointers = 1;

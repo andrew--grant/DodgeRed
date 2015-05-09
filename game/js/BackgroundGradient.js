@@ -1,6 +1,7 @@
 'use strict';
 
 var BackgroundGradient = function (game) {
+    // todo: allow for pasing in colors
     this.game = game;
     var h = this.game.height;
     var w = this.game.width;

@@ -13,6 +13,7 @@ var Disc = function (game, x, y, trailManager, playerDisc) {
     this.outOfBoundsKill = true;
     this.num = -1;
     this.lastUsed = 0;
+    this.self = self;
 };
 
 Disc.prototype = Object.create(Phaser.Sprite.prototype);
@@ -23,10 +24,10 @@ Disc.prototype.update = function () {
         this.trailManager.add(this.x, this.y);
         this.lastUsed = this.num;
     }
+    var self = this;
     this.game.physics.arcade.overlap(this, this.playerDisc, function () {
-        console.log("player disc to disc overlap");
-        //alert("You lose!!");
-        // todo: end game or decrease lives?
+        console.log(self.game.states);
+        self.game.state.start('gameOver');
     });
 };
 
