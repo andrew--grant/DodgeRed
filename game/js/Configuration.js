@@ -22,18 +22,18 @@ var Configuration = function (game) {
                 key: 'collect',
                 path: 'game/assets/collect-spritesheet.png'
             },
-            loadingBar : {
+            loadingBar: {
                 key: 'loadingBar',
                 path: 'game/assets/loading-bar.png'
             },
-            loadingBackground : {
+            loadingBackground: {
                 key: 'loadingBackground',
                 path: 'game/assets/loading-background.png'
             }
         },
-        colors: {
-            backgroundColor: 0xffffff
-        },
+        backgroundColor: 0xffffff,
+        fontColor: "#fff200",
+        fontFace: "Revalia",
         gridSpawnLocations: [
             [this.game.width / 2 - 100, this.game.height / 2 - 100],
             [this.game.width / 2, this.game.height / 2 - 100],

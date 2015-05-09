@@ -5,7 +5,7 @@ var Score = function (game) {
     this.score = 0;
     this.scoreLabel = "Score: ";
     Phaser.Text.call(this, game, 50, 100, this.scoreLabel + " " + this.score,
-        {font: "50px Revalia", fill: "#fff200", align: "center"});
+        {font: "50px " + Main.Config.fontFace, fill: Main.Config.fontColor, align: "center"});
     this.game.add.existing(this);
     //todo: for text, may need to respond to events and then create these objects (score, best etc)
 };

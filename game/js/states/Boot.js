@@ -23,7 +23,7 @@ Main.Boot.prototype = {
         // game is in loses focus. You can disable that here:
         this.game.stage.disableVisibilityChange = true;
         this.game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
-        this.game.stage.backgroundColor = Main.Config.colors.backgroundColor;
+        this.game.stage.backgroundColor = Main.Config.backgroundColor;
         if (this.game.device.desktop) {
             // If you have any desktop specific settings, they can go in here
             this.scale.pageAlignHorizontally = false;

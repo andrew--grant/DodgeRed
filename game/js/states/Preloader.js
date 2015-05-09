@@ -2,6 +2,8 @@ Main.Preloader = function (game) {
     this.game = game;
 };
 
+Main.fontsReady = false;
+
 Main.Preloader.prototype = {
     preload: function () {
 
@@ -27,6 +29,9 @@ Main.Preloader.prototype = {
             custom: {
                 families: ['Revalia'],
                 urls: ['game/assets/fonts.css']
+            },
+            active: function () {
+                Main.fontsReady = true;
             }
         };
         this.game.load.start();
@@ -42,7 +47,14 @@ Main.Preloader.prototype = {
 
     loadComplete: function () {
         console.log("progress: " + this.game.load.progress);
-        this.state.start('game');
+        // wait for for fonts to be active
+        // (the loader loads the script only)
+        game.time.events.loop(500, function () {
+            if (Main.fontsReady) {
+               this.state.start('menu');
+            }
+        }, this);
+
+
     }
 };
-

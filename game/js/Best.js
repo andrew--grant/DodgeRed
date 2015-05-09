@@ -6,7 +6,7 @@ var Best = function (game) {
     this.bestScore = 0;
     this.bestScoreLabel = "Best: ";
     Phaser.Text.call(this, game, 900, 100, this.bestScoreLabel + " " + this.bestScore,
-        {font: "50px Revalia", fill: "#fff200", align: "center"});
+        {font: "50px " + Main.Config.fontFace, fill: Main.Config.fontColor, align: "center"});
     this.game.add.existing(this);
 };
 
