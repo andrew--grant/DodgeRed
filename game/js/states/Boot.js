@@ -15,7 +15,7 @@ Main.Boot.prototype = {
         //});
     },
 
-    create: function () {   var bgGradient = new BackgroundGradient(this.game);
+    create: function () {   var bgGradient = new BackgroundGradient(this.game, "#0054a6", "#66ccff");
         bgGradient.add();
         // Unless you specifically know your game needs
         // to support multi-touch I would recommend setting this to 1
@@ -26,7 +26,8 @@ Main.Boot.prototype = {
         this.game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
         this.game.stage.backgroundColor = Main.Config.backgroundColor;
         if (this.game.device.desktop) {
-            // If you have any desktop specific settings, they can go in here
+            // If you have any desktop specific
+            // settings, they can go in here
             this.scale.pageAlignHorizontally = false;
         }
         else {

@@ -5,9 +5,8 @@ Main.GameOver = function (game) {
 Main.GameOver.prototype = {
 
     create: function () {
-        var bgGradient = new BackgroundGradient(this.game);
+        var bgGradient = new BackgroundGradient(this.game, "#0054a6", "#66ccff");
         bgGradient.add();
-        // todo: start button for now, extend menu later
         this.text = game.add.text(game.world.centerX, game.world.centerY, "Game Over\nPlay Again?", {
             font: "90px " + Main.Config.fontFace,
             fill: Main.Config.fontColor,

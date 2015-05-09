@@ -23,7 +23,6 @@ CollectManager.prototype.getRandomPosition = function () {
 };
 
 CollectManager.prototype.start = function () {
-    //todo: on a timer, or there till collected?
     this.game.time.events.loop(this.waitTime, function () {
         var pos = this.getRandomPosition();
         new Collect(pos[0], pos[1], this.playerDisc, this.game);

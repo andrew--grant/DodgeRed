@@ -5,9 +5,8 @@ Main.Game = function (game) {
 Main.Game.prototype = {
 
     create: function () {
-        //game.time.advancedTiming = true;
         this.game.physics.startSystem(Phaser.Physics.ARCADE);
-        var bgGradient = new BackgroundGradient(this.game);
+        var bgGradient = new BackgroundGradient(this.game, "#0054a6", "#66ccff");
         bgGradient.add();
         var grid = new Grid(this.game.stage.width / 2, this.game.stage.height / 2, this.game);
         grid.add();

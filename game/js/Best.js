@@ -1,8 +1,6 @@
 'use strict';
 
 var Best = function (game) {
-    // http://support.ludei.com/hc/communities/public/questions/200706898-Problem-with-custom-fonts
-    // http://blog.ludei.com/managing-fonts-in-cocoonjs-1-3/
     this.bestScore = 0;
     this.bestScoreLabel = "Best: ";
     Phaser.Text.call(this, game, 900, 100, this.bestScoreLabel + " " + this.bestScore,

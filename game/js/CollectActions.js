@@ -29,4 +29,3 @@ CollectActions.prototype.showPointsAndAnimate = function (pointsEarned, collectO
         });
     }
 };
-

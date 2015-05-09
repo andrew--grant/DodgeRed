@@ -10,7 +10,6 @@ var Collect = function (x, y, playerDisc, game) {
     this.anchor.setTo(0.5, 0.5);
     this.animations.add('collectanim', [1, 2, 3, 4]);
     this.collectActions = new CollectActions(game);
-    // todo: check / remove collect from game when hit
 };
 
 Collect.prototype = Object.create(Phaser.Sprite.prototype);
