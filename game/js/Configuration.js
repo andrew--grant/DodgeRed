@@ -34,7 +34,7 @@ var Configuration = function (game) {
         backgroundColor: 0xffffff,
         fontColor: "#fff200",
         fontFace: "Revalia",
-        gridSpawnLocations: [
+        collectSpawnLocations: [
             [this.game.width / 2 - 100, this.game.height / 2 - 100],
             [this.game.width / 2, this.game.height / 2 - 100],
             [this.game.width / 2 + 100, this.game.height / 2 - 100],

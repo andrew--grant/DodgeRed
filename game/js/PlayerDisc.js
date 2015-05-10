@@ -9,10 +9,10 @@ var PlayerDisc = function (x, y, game, score) {
     this.anchor.setTo(0.5, 0.5);
     this.scale.set(.8, .8);
     this.inputDisabled = false;
-    this.leftMostMove = Main.Config.gridSpawnLocations[0][0];
-    this.rightMostMove = Main.Config.gridSpawnLocations[5][0];
-    this.topMostMove = Main.Config.gridSpawnLocations[0][1];
-    this.bottomMostMove = Main.Config.gridSpawnLocations[7][1];
+    this.leftMostMove = Main.Config.collectSpawnLocations[0][0];
+    this.rightMostMove = Main.Config.collectSpawnLocations[5][0];
+    this.topMostMove = Main.Config.collectSpawnLocations[0][1];
+    this.bottomMostMove = Main.Config.collectSpawnLocations[7][1];
     var self = this;
     this.game.input.keyboard.onDownCallback = function (e) {
         self.move(e, self);
@@ -29,7 +29,7 @@ PlayerDisc.prototype.doTween = function (spriteRef, tweenProps) {
     var self = this;
     if (!self.inputDisabled) {
         self.inputDisabled = true;
-        var moveTween =  this.game.add.tween(spriteRef);
+        var moveTween = this.game.add.tween(spriteRef);// todo: beware of the 'Uncaught TypeError: Cannot read property 'add' of null' error
         moveTween.to(tweenProps, 200).onComplete.add(function () {
             self.inputDisabled = false;
         });
