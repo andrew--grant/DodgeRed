@@ -2,7 +2,7 @@
 
 var DiscLoop = function (game, discManager) {
     this.loopDuration = 2000;
-    this.speed = 600;
+    this.speed = 700;
     this.game = game;
     this.discManager = discManager;
 
@@ -39,8 +39,56 @@ var DiscLoop = function (game, discManager) {
 DiscLoop.prototype.start = function () {
     this.game.time.events.loop(this.loopDuration, function () {
 
+        var randomLane = this.game.rnd.integerInRange(0, 11);
+        var disc = this.discManager.getFromGroup();
+        disc.exists = true;
+        disc.body.velocity.x = this.lanes[randomLane].velocity.x;
+        disc.body.velocity.y = this.lanes[randomLane].velocity.y;
+        disc.x = this.lanes[randomLane].spawnx;
+        disc.y = this.lanes[randomLane].spawny;
 
-       //  Left to Right
+
+        var timer = game.time.events.add(400, function () {
+            var rand2 = this.game.rnd.integerInRange(0, 10) >= 0;
+            if (rand2) {
+                randomLane = this.game.rnd.integerInRange(0, 11);
+                var disc2 = this.discManager.getFromGroup();
+                disc2.exists = true;
+                disc2.body.velocity.x = this.lanes[randomLane].velocity.x;
+                disc2.body.velocity.y = this.lanes[randomLane].velocity.y;
+                disc2.x = this.lanes[randomLane].spawnx;
+                disc2.y = this.lanes[randomLane].spawny;
+            }
+        }, this);
+
+        var timer = game.time.events.add(650, function () {
+            var rand3 = this.game.rnd.integerInRange(0, 10) >= 0;
+            if (rand3) {
+                randomLane = this.game.rnd.integerInRange(0, 11);
+                var disc2 = this.discManager.getFromGroup();
+                disc2.exists = true;
+                disc2.body.velocity.x = this.lanes[randomLane].velocity.x;
+                disc2.body.velocity.y = this.lanes[randomLane].velocity.y;
+                disc2.x = this.lanes[randomLane].spawnx;
+                disc2.y = this.lanes[randomLane].spawny;
+            }
+        }, this);
+
+
+    }, this);
+};
+
+DiscLoop.prototype.findNextSpawnLane = function () {
+
+};
+
+DiscLoop.prototype.allAtOnce = function () {
+    // todo: just a demo, can remove
+
+    this.game.time.events.loop(this.loopDuration, function () {
+
+
+        //  Left to Right
         var disc0 = this.discManager.getFromGroup();
         disc0.exists = true;
         disc0.body.velocity.x = this.lanes[0].velocity.x;
@@ -134,8 +182,5 @@ DiscLoop.prototype.start = function () {
         disc11.y = this.lanes[11].spawny;
 
     }, this);
-};
-
-DiscLoop.prototype.findNextSpawnLane = function () {
 
 };
