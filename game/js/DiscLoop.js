@@ -12,7 +12,6 @@ var DiscLoop = function (game, discManager) {
         centerLaneLeft = {x: 0, y: this.game.height / 2},
         centerLaneRight = {x: this.game.width, y: this.game.width};
 
-
     // When its time to spawn we need to know where
     // to spawn from and what direction to travel in
     this.lanes = [
