@@ -26,7 +26,7 @@ Disc.prototype.update = function () {
     }
     var self = this;
     this.game.physics.arcade.overlap(this, this.playerDisc, function () {
-        self.game.state.start('gameOver');
+        //self.game.state.start('gameOver');
     });
 };
 
