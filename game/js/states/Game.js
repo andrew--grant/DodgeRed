@@ -15,7 +15,7 @@ Main.Game.prototype = {
         var playerDisc = new PlayerDisc(this.game.stage.width / 2, this.game.stage.height / 2, this.game, score);
         var discManager = new DiscManager(playerDisc, this.game);
         //discManager.startAttacking();
-        var discLoop = new DiscLoop(this.game, discManager);
+        var discLoop = new DiscLoop(this.game, discManager, score);
         discLoop.start();
         new CollectManager(playerDisc, this.game).start();
     }

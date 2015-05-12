@@ -11,13 +11,14 @@ var DiscManager = function (playerDisc, game) {
     this.xCenter = this.game.width / 2;
     this.xLeft = this.xCenter - this.colWidth;
     this.xRight = this.xCenter + this.colWidth;
+    this.discSpeed = 400;
 };
 
 DiscManager.prototype.startAttacking = function () {
     this.game.time.events.loop(2000, function () {
         var disc = this.getFromGroup();
         disc.exists = true;
-        disc.body.velocity.y = 400;
+        disc.body.velocity.y = this.discSpeed;
         disc.x = this.game.width / 2;
         disc.y = -50;
     }, this);
@@ -31,4 +32,8 @@ DiscManager.prototype.getFromGroup = function () {
         return disc;
     }
     return disc;
+};
+
+DiscManager.prototype.increaseSpeedBy = function (speed) {
+    this.speed = speed;
 };

@@ -1,10 +1,15 @@
 'use strict';
 
-var DiscLoop = function (game, discManager) {
+var DiscLoop = function (game, discManager, score) {
     this.loopDuration = 2000;
-    this.speed = 700;
+    this.speed = 800;
+    this.speedIncrease = 40;
+    this.greaterThan = 10;
     this.game = game;
     this.discManager = discManager;
+    this.score = score;
+    this.spawnDelay = 1000;
+    this.lastScoreLoggedInLoop = 0;
 
     // general positions to base lanes upon
     var centerLaneTop = {x: this.game.width / 2, y: 0},
@@ -39,6 +44,23 @@ var DiscLoop = function (game, discManager) {
 DiscLoop.prototype.start = function () {
     this.game.time.events.loop(this.loopDuration, function () {
 
+        // Difficulty:
+        // Decrease greater than odds
+        // increase speed (gradually over the 3 disc spawn points)
+        // increase loop duration
+        // decrease spawn delays
+        // send random fast discs
+
+        var score = this.score.getScore();
+        if (score % 10 === 0 && score > 0) {
+            if (this.lastScoreLoggedInLoop !== score) {
+                this.greaterThan -= 1;
+                this.speed += this.speedIncrease;
+                this.spawnDelay -= 10; // todo: cap this, or remove. caps on other needed so they dont go negative
+                this.lastScoreLoggedInLoop = score;
+            }
+        }
+
         var randomLane = this.game.rnd.integerInRange(0, 11);
         var disc = this.discManager.getFromGroup();
         disc.exists = true;
@@ -48,10 +70,15 @@ DiscLoop.prototype.start = function () {
         disc.y = this.lanes[randomLane].spawny;
 
 
-        var timer = game.time.events.add(400, function () {
-            var rand2 = this.game.rnd.integerInRange(0, 10) >= 0;
+        var timer = game.time.events.add(this.spawnDelay, function () {
+            var rand2 = this.game.rnd.integerInRange(0, 10) >= this.greaterThan;
             if (rand2) {
                 randomLane = this.game.rnd.integerInRange(0, 11);
+                //if(this.lanes[randomLane].velocity.x != 0){
+                //    this.lanes[randomLane].velocity.x = this.speed;
+                //}else{
+                //    this.lanes[randomLane].velocity.y = this.speed;
+                //}
                 var disc2 = this.discManager.getFromGroup();
                 disc2.exists = true;
                 disc2.body.velocity.x = this.lanes[randomLane].velocity.x;
@@ -61,8 +88,8 @@ DiscLoop.prototype.start = function () {
             }
         }, this);
 
-        var timer = game.time.events.add(650, function () {
-            var rand3 = this.game.rnd.integerInRange(0, 10) >= 0;
+        var timer = game.time.events.add(this.spawnDelay + 250, function () {
+            var rand3 = this.game.rnd.integerInRange(0, 10) >= this.greaterThan;
             if (rand3) {
                 randomLane = this.game.rnd.integerInRange(0, 11);
                 var disc2 = this.discManager.getFromGroup();
@@ -71,8 +98,12 @@ DiscLoop.prototype.start = function () {
                 disc2.body.velocity.y = this.lanes[randomLane].velocity.y;
                 disc2.x = this.lanes[randomLane].spawnx;
                 disc2.y = this.lanes[randomLane].spawny;
+
             }
         }, this);
+
+        // low chance fast disc
+        // ....
 
 
     }, this);
