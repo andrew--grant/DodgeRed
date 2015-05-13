@@ -2,8 +2,8 @@
 
 var DiscLoop = function (game, discManager, score) {
     this.loopDuration = 2000;
-    this.speed = 800;
-    this.speedIncrease = 40;
+    this.speed = 600;
+    this.speedIncrease = 200;
     this.greaterThan = 10;
     this.game = game;
     this.discManager = discManager;
@@ -21,27 +21,74 @@ var DiscLoop = function (game, discManager, score) {
     // to spawn from and what direction to travel in
     this.lanes = [
         // 3 lanes spawning from the left
-        {spawnx: centerLaneLeft.x, spawny: centerLaneLeft.y - 100, velocity: {x: this.speed, y: 0}},
-        {spawnx: centerLaneLeft.x, spawny: centerLaneLeft.y, velocity: {x: this.speed, y: 0}},
-        {spawnx: centerLaneLeft.x, spawny: centerLaneLeft.y + 100, velocity: {x: this.speed, y: 0}},
+        {
+            spawnx: centerLaneLeft.x,
+            spawny: centerLaneLeft.y - 100,
+            velocity: {x: this.speed, y: 0, applySpeedTo: 'x', negative: false}
+        },
+        {
+            spawnx: centerLaneLeft.x,
+            spawny: centerLaneLeft.y,
+            velocity: {applySpeedTo: 'x', negative: false}
+        },
+        {
+            spawnx: centerLaneLeft.x,
+            spawny: centerLaneLeft.y + 100,
+            velocity: {applySpeedTo: 'x', negative: false}
+        },
         // 3 lanes spawning from the right
-        {spawnx: centerLaneRight.x, spawny: centerLaneLeft.y - 100, velocity: {x: -this.speed, y: 0}},
-        {spawnx: centerLaneRight.x, spawny: centerLaneLeft.y, velocity: {x: -this.speed, y: 0}},
-        {spawnx: centerLaneRight.x, spawny: centerLaneLeft.y + 100, velocity: {x: -this.speed, y: 0}},
+        {
+            spawnx: centerLaneRight.x,
+            spawny: centerLaneLeft.y - 100,
+            velocity: {applySpeedTo: 'x', negative: true}
+        },
+        {
+            spawnx: centerLaneRight.x,
+            spawny: centerLaneLeft.y,
+            velocity: {applySpeedTo: 'x', negative: true}
+        },
+        {
+            spawnx: centerLaneRight.x,
+            spawny: centerLaneLeft.y + 100,
+            velocity: {applySpeedTo: 'x', negative: true}
+        },
         // 3 lanes spawning from the top
-        {spawnx: centerLaneTop.x + 100, spawny: centerLaneTop.y, velocity: {x: 0, y: this.speed}},
-        {spawnx: centerLaneTop.x, spawny: centerLaneTop.y, velocity: {x: 0, y: this.speed}},
-        {spawnx: centerLaneTop.x - 100, spawny: centerLaneTop.y, velocity: {x: 0, y: this.speed}},
+        {
+            spawnx: centerLaneTop.x + 100,
+            spawny: centerLaneTop.y,
+            velocity: {applySpeedTo: 'y', negative: false}
+        },
+        {
+            spawnx: centerLaneTop.x,
+            spawny: centerLaneTop.y,
+            velocity: {applySpeedTo: 'y', negative: false}
+        },
+        {
+            spawnx: centerLaneTop.x - 100,
+            spawny: centerLaneTop.y,
+            velocity: {applySpeedTo: 'y', negative: false}
+        },
         // 3 lanes spawning from the bottom
-        {spawnx: centerLaneBottom.x + 100, spawny: centerLaneBottom.y, velocity: {x: 0, y: -this.speed}},
-        {spawnx: centerLaneBottom.x, spawny: centerLaneBottom.y, velocity: {x: 0, y: -this.speed}},
-        {spawnx: centerLaneBottom.x - 100, spawny: centerLaneBottom.y, velocity: {x: 0, y: -this.speed}},
+        {
+            spawnx: centerLaneBottom.x + 100,
+            spawny: centerLaneBottom.y,
+            velocity: {applySpeedTo: 'y', negative: true}
+        },
+        {
+            spawnx: centerLaneBottom.x,
+            spawny: centerLaneBottom.y,
+            velocity: {applySpeedTo: 'y', negative: true}
+        },
+        {
+            spawnx: centerLaneBottom.x - 100,
+            spawny: centerLaneBottom.y,
+            velocity: {applySpeedTo: 'y', negative: true}
+        },
     ];
-
-
 };
 
 DiscLoop.prototype.start = function () {
+    // todo: investigate best way to speed up the loop
     this.game.time.events.loop(this.loopDuration, function () {
 
         // Difficulty:
@@ -54,9 +101,11 @@ DiscLoop.prototype.start = function () {
         var score = this.score.getScore();
         if (score % 10 === 0 && score > 0) {
             if (this.lastScoreLoggedInLoop !== score) {
-                this.greaterThan -= 1;
                 this.speed += this.speedIncrease;
-                this.spawnDelay -= 10; // todo: cap this, or remove. caps on other needed so they dont go negative
+                this.greaterThan -= 1;
+                // todo: cap this, or remove. caps on
+                // other needed so they dont go negative
+                this.spawnDelay -= 10;
                 this.lastScoreLoggedInLoop = score;
             }
         }
@@ -64,8 +113,15 @@ DiscLoop.prototype.start = function () {
         var randomLane = this.game.rnd.integerInRange(0, 11);
         var disc = this.discManager.getFromGroup();
         disc.exists = true;
-        disc.body.velocity.x = this.lanes[randomLane].velocity.x;
-        disc.body.velocity.y = this.lanes[randomLane].velocity.y;
+        if (this.lanes[randomLane].velocity.applySpeedTo == "x") {
+            this.lanes[randomLane].velocity.negative == true ?
+                disc.body.velocity.x = -this.speed : disc.body.velocity.x = this.speed;
+            disc.body.velocity.y = 0;
+        } else {
+            this.lanes[randomLane].velocity.negative == true ?
+                disc.body.velocity.y = -this.speed : disc.body.velocity.y = this.speed;
+            disc.body.velocity.x = 0;
+        }
         disc.x = this.lanes[randomLane].spawnx;
         disc.y = this.lanes[randomLane].spawny;
 
@@ -74,15 +130,17 @@ DiscLoop.prototype.start = function () {
             var rand2 = this.game.rnd.integerInRange(0, 10) >= this.greaterThan;
             if (rand2) {
                 randomLane = this.game.rnd.integerInRange(0, 11);
-                //if(this.lanes[randomLane].velocity.x != 0){
-                //    this.lanes[randomLane].velocity.x = this.speed;
-                //}else{
-                //    this.lanes[randomLane].velocity.y = this.speed;
-                //}
                 var disc2 = this.discManager.getFromGroup();
                 disc2.exists = true;
-                disc2.body.velocity.x = this.lanes[randomLane].velocity.x;
-                disc2.body.velocity.y = this.lanes[randomLane].velocity.y;
+                if (this.lanes[randomLane].velocity.applySpeedTo == "x") {
+                    this.lanes[randomLane].velocity.negative == true ?
+                        disc2.body.velocity.x = -this.speed : disc2.body.velocity.x = this.speed;
+                    disc2.body.velocity.y = 0;
+                } else {
+                    this.lanes[randomLane].velocity.negative == true ?
+                        disc2.body.velocity.y = -this.speed : disc2.body.velocity.y = this.speed;
+                    disc2.body.velocity.x = 0;
+                }
                 disc2.x = this.lanes[randomLane].spawnx;
                 disc2.y = this.lanes[randomLane].spawny;
             }
@@ -92,12 +150,19 @@ DiscLoop.prototype.start = function () {
             var rand3 = this.game.rnd.integerInRange(0, 10) >= this.greaterThan;
             if (rand3) {
                 randomLane = this.game.rnd.integerInRange(0, 11);
-                var disc2 = this.discManager.getFromGroup();
-                disc2.exists = true;
-                disc2.body.velocity.x = this.lanes[randomLane].velocity.x;
-                disc2.body.velocity.y = this.lanes[randomLane].velocity.y;
-                disc2.x = this.lanes[randomLane].spawnx;
-                disc2.y = this.lanes[randomLane].spawny;
+                var disc3 = this.discManager.getFromGroup();
+                disc3.exists = true;
+                if (this.lanes[randomLane].velocity.applySpeedTo == "x") {
+                    this.lanes[randomLane].velocity.negative == true ?
+                        disc3.body.velocity.x = -this.speed : disc3.body.velocity.x = this.speed;
+                    disc3.body.velocity.y = 0;
+                } else {
+                    this.lanes[randomLane].velocity.negative == true ?
+                        disc3.body.velocity.y = -this.speed : disc3.body.velocity.y = this.speed;
+                    disc3.body.velocity.x = 0;
+                }
+                disc3.x = this.lanes[randomLane].spawnx;
+                disc3.y = this.lanes[randomLane].spawny;
 
             }
         }, this);
