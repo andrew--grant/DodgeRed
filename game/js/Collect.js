@@ -1,9 +1,10 @@
 'use strict';
 
-var Collect = function (x, y, playerDisc, game) {
-    Phaser.Sprite.call(this, game, x, y, Main.Config.sprites.collect.key, 0);
-    this.game = game;
-    this.playerDisc = playerDisc;
+var Collect = function (x, y, collectManager) {
+    Phaser.Sprite.call(this, collectManager.game, x, y, Main.Config.sprites.collect.key, 0);
+    this.game = collectManager.game;
+    this.collectManager = collectManager;
+    this.playerDisc = collectManager.playerDisc;
     this.game.physics.arcade.enable(this);
     this.scale.setTo(0);
     this.game.add.existing(this);
@@ -22,9 +23,10 @@ Collect.prototype.update = function (spriteRef, tweenProps) {
         this.scale.setTo(this.scale.x + .2, this.scale.y + .2);
     }
     this.game.physics.arcade.overlap(this, this.playerDisc, function () {
-        self.collectActions.showPointsAndAnimate(1, self, function () {
+        self.collectActions.showPointsAndAnimate(1, self,self.collectManager, function () {
             self.playerDisc.score.updateScore(1);
         });
+
     });
 };
 

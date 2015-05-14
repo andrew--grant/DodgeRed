@@ -19,13 +19,11 @@ CollectManager.prototype.getRandomPosition = function () {
             [centerx, centery + 100],
             [centerx + 100, centery + 100]
         ];
-    return Main.Config.collectSpawnLocations[ this.game.rnd.integerInRange(0, 8)]
+    return Main.Config.collectSpawnLocations[this.game.rnd.integerInRange(0, 8)]
 };
 
 CollectManager.prototype.start = function () {
-    this.game.time.events.loop(this.waitTime, function () {
-        var pos = this.getRandomPosition();
-        new Collect(pos[0], pos[1], this.playerDisc, this.game);
-    }, this);
+    var pos = this.getRandomPosition();
+    new Collect(pos[0], pos[1], this);
 };
 

@@ -2,12 +2,13 @@
 
 var DiscLoop = function (game, discManager, score) {
     this.loopDuration = 2000;
-    this.speed = 600;
-    this.speedIncrease = 200;
-    this.greaterThan = 10;
+    this.speed = 650;
+    this.speedIncrease = 40;
+    this.greaterThan = 5;
     this.game = game;
     this.discManager = discManager;
     this.score = score;
+    this.difficultyLevel = 1;
     this.spawnDelay = 1000;
     this.lastScoreLoggedInLoop = 0;
 
@@ -102,10 +103,12 @@ DiscLoop.prototype.start = function () {
         if (score % 10 === 0 && score > 0) {
             if (this.lastScoreLoggedInLoop !== score) {
                 this.speed += this.speedIncrease;
-                this.greaterThan -= 1;
-                // todo: cap this, or remove. caps on
-                // other needed so they dont go negative
-                this.spawnDelay -= 10;
+                if (this.greaterThan > 0) {
+                    this.greaterThan -= 1;
+                    this.spawnDelay -= 10;
+                    this.difficultyLevel += 1;
+                    console.log("dificulty level is: " + this.difficultyLevel);
+                }
                 this.lastScoreLoggedInLoop = score;
             }
         }
@@ -148,7 +151,7 @@ DiscLoop.prototype.start = function () {
 
         var timer = game.time.events.add(this.spawnDelay + 250, function () {
             var rand3 = this.game.rnd.integerInRange(0, 10) >= this.greaterThan;
-            if (rand3) {
+            if (rand3 && this.difficultyLevel > 3) {
                 randomLane = this.game.rnd.integerInRange(0, 11);
                 var disc3 = this.discManager.getFromGroup();
                 disc3.exists = true;
@@ -166,6 +169,29 @@ DiscLoop.prototype.start = function () {
 
             }
         }, this);
+
+
+        //var timer = game.time.events.add(this.spawnDelay + 400, function () {
+        //    var rand4 = this.game.rnd.integerInRange(0, 10) >= this.greaterThan;
+        //    if (rand4) {
+        //        randomLane = this.game.rnd.integerInRange(0, 11);
+        //        var disc4 = this.discManager.getFromGroup();
+        //        disc4.exists = true;
+        //        if (this.lanes[randomLane].velocity.applySpeedTo == "x") {
+        //            this.lanes[randomLane].velocity.negative == true ?
+        //                disc4.body.velocity.x = -this.speed : disc4.body.velocity.x = this.speed;
+        //            disc4.body.velocity.y = 0;
+        //        } else {
+        //            this.lanes[randomLane].velocity.negative == true ?
+        //                disc4.body.velocity.y = -this.speed : disc4.body.velocity.y = this.speed;
+        //            disc4.body.velocity.x = 0;
+        //        }
+        //        disc4.x = this.lanes[randomLane].spawnx;
+        //        disc4.y = this.lanes[randomLane].spawny;
+        //
+        //    }
+        //}, this);
+
 
         // low chance fast disc
         // ....

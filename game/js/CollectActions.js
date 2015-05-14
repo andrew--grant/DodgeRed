@@ -12,19 +12,23 @@ var CollectActions = function (game) {
 CollectActions.prototype = Object.create(Phaser.Text.prototype);
 CollectActions.prototype.constructor = CollectActions;
 
-CollectActions.prototype.showPointsAndAnimate = function (pointsEarned, collectObj, callback) {
+CollectActions.prototype.showPointsAndAnimate = function (pointsEarned, collectObj, collectManager, callback) {
     this.text = "+" + pointsEarned;
     this.x = collectObj.x;
-    this.y = collectObj.y -50;
+    this.y = collectObj.y - 50;
     var self = this;
-    if(!self.executingPopover ){
+    if (!self.executingPopover) {
         self.executingPopover = true;
         collectObj.play('collectanim', 20, false, true);
         callback(pointsEarned);
-        var tween =  this.game.add.tween(this)
+        var tween = this.game.add.tween(this)
             .to({y: this.y - 30}, 250, "Linear", false)
             .to({alpha: 0}, 350, "Linear", false).start();
         tween.onComplete.add(function () {
+            // wait a moment, spawn another
+            game.time.events.add(500, function () {
+                collectManager.start();
+            }, this);
             self.executingPopover = false;
         });
     }
