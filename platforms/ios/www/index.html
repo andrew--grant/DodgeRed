@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<!--
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+     KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="msapplication-tap-highlight" content="no" />
+        <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+        <link rel="stylesheet" type="text/css" href="css/index.css" />
+        <title>thedodgegame</title>
+        <script src="lib/phaser.min.js"></script>
+        <script src="lib/hammer.min.js"></script>
+        <script src="game/js/Configuration.js"></script>
+        <script src="game/js/Disc.js"></script>
+        <script src="game/js/PlayerDisc.js"></script>
+        <script src="game/js/TrailManager.js"></script>
+        <script src="game/js/Trail.js"></script>
+        <script src="game/js/Grid.js"></script>
+        <script src="game/js/Collect.js"></script>
+        <script src="game/js/CollectManager.js"></script>
+        <script src="game/js/DiscManager.js"></script>
+        <script src="game/js/DiscLoop.js"></script>
+        <script src="game/js/BackgroundGradient.js"></script>
+        <script src="game/js/Score.js"></script>
+        <script src="game/js/Best.js"></script>
+        <script src="game/js/CollectActions.js"></script>
+        <script src="game/js/states/Boot.js"></script>
+        <script src="game/js/states/Preloader.js"></script>
+        <script src="game/js/states/Menu.js"></script>
+        <script src="game/js/states/Game.js"></script>
+        <script src="game/js/states/GameOver.js"></script>
+    </head>
+    <body>
+        <!--<div class="app">-->
+            <!--<h1>Apache Cordova</h1>-->
+            <!--<div id="deviceready" class="blink">-->
+                <!--<p class="event listening">Connecting to Device</p>-->
+                <!--<p class="event received">Device is Ready</p>-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--<script type="text/javascript" src="cordova.js"></script>-->
+        <!--<script type="text/javascript" src="js/index.js"></script>-->
+
+        <script>
+            function boot() {
+                var game = new Phaser.Game(1242, 2208, Phaser.AUTO, '');
+                game.state.add('boot', Main.Boot, true);
+                game.state.add('preloader', Main.Preloader);
+                game.state.add('menu', Main.Menu);
+                game.state.add('game', Main.Game);
+                game.state.add('gameOver', Main.GameOver);
+            }
+
+            window.onload = function () {
+                boot();
+            }
+        </script>
+    </body>
+</html>

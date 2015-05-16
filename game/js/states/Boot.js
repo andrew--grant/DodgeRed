@@ -7,12 +7,11 @@ Main.Boot = function (game) {
 Main.Boot.prototype = {
     preload: function () {
         Main.Config = Configuration(this.game);
-        // todo: swipe handling
-        //var hammer = new Hammer(this.game.canvas);
-        //hammer.get('pan').set({direction: Hammer.DIRECTION_ALL});
-        //hammer.on("swipeleft swiperight swipeup swipedown", function (ev) {
-        //    console.log("ev " + ev.type);
-        //});
+        var hammer = new Hammer(this.game.canvas);
+        hammer.get('swipe').set({direction: Hammer.DIRECTION_ALL});
+        hammer.on("swipeleft swiperight swipeup swipedown", function (ev) {
+            console.log("ev " + ev.type);
+        });
     },
 
     create: function () {   var bgGradient = new BackgroundGradient(this.game, "#0054a6", "#66ccff");
@@ -34,7 +33,7 @@ Main.Boot.prototype = {
             // Mobile settings
             this.game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
             this.scale.forceLandscape = true;
-            this.scale.pageAlignHorizontally = true;
+            //this.scale.pageAlignHorizontally = true;
         }
         this.scale.setScreenSize(true);
         this.state.start('preloader');
