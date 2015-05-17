@@ -23,7 +23,7 @@ Main.Preloader.prototype = {
         this.game.load.image(Main.Config.sprites.disc.key, Main.Config.sprites.disc.path);
         this.game.load.image(Main.Config.sprites.grid.key, Main.Config.sprites.grid.path);
         this.game.load.image(Main.Config.sprites.trail.key, Main.Config.sprites.trail.path);
-        this.game.load.spritesheet(Main.Config.sprites.collect.key, Main.Config.sprites.collect.path, 100, 100);
+        this.game.load.spritesheet(Main.Config.sprites.collect.key, Main.Config.sprites.collect.path, 120, 120);
         this.game.load.script('webfont', 'lib/webfontloader.js');
         WebFontConfig = {
             custom: {

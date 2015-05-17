@@ -3,14 +3,14 @@ var DiscManager = function (playerDisc, game) {
     this.playerDisc = playerDisc
     this.discGroup = this.game.add.group();
     this.trailManager = new TrailManager(game);
-    this.padding = 20;
-    this.colWidth = 155 + this.padding;
-    this.yCenter = this.game.height / 2;
-    this.yLeft = this.yCenter - this.colWidth;
-    this.yRight = this.yCenter + this.colWidth;
-    this.xCenter = this.game.width / 2;
-    this.xLeft = this.xCenter - this.colWidth;
-    this.xRight = this.xCenter + this.colWidth;
+    //this.padding = 20;
+    //this.colWidth = 155; // + this.padding;
+    //this.yCenter = this.game.height / 2;
+    //this.yLeft = this.yCenter - this.colWidth;
+    //this.yRight = this.yCenter + this.colWidth;
+    //this.xCenter = this.game.width / 2;
+    //this.xLeft = this.xCenter - this.colWidth;
+    //this.xRight = this.xCenter + this.colWidth;
     this.discSpeed = 400;
 };
 

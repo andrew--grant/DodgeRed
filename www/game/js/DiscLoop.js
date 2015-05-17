@@ -24,7 +24,7 @@ var DiscLoop = function (game, discManager, score) {
         // 3 lanes spawning from the left
         {
             spawnx: centerLaneLeft.x,
-            spawny: centerLaneLeft.y - 100,
+            spawny: centerLaneLeft.y - Main.Config.moveDistance,
             velocity: {x: this.speed, y: 0, applySpeedTo: 'x', negative: false}
         },
         {
@@ -34,13 +34,13 @@ var DiscLoop = function (game, discManager, score) {
         },
         {
             spawnx: centerLaneLeft.x,
-            spawny: centerLaneLeft.y + 100,
+            spawny: centerLaneLeft.y + Main.Config.moveDistance,
             velocity: {applySpeedTo: 'x', negative: false}
         },
         // 3 lanes spawning from the right
         {
             spawnx: centerLaneRight.x,
-            spawny: centerLaneLeft.y - 100,
+            spawny: centerLaneLeft.y - Main.Config.moveDistance,
             velocity: {applySpeedTo: 'x', negative: true}
         },
         {
@@ -50,12 +50,12 @@ var DiscLoop = function (game, discManager, score) {
         },
         {
             spawnx: centerLaneRight.x,
-            spawny: centerLaneLeft.y + 100,
+            spawny: centerLaneLeft.y + Main.Config.moveDistance,
             velocity: {applySpeedTo: 'x', negative: true}
         },
         // 3 lanes spawning from the top
         {
-            spawnx: centerLaneTop.x + 100,
+            spawnx: centerLaneTop.x + Main.Config.moveDistance,
             spawny: centerLaneTop.y,
             velocity: {applySpeedTo: 'y', negative: false}
         },
@@ -65,13 +65,13 @@ var DiscLoop = function (game, discManager, score) {
             velocity: {applySpeedTo: 'y', negative: false}
         },
         {
-            spawnx: centerLaneTop.x - 100,
+            spawnx: centerLaneTop.x - Main.Config.moveDistance,
             spawny: centerLaneTop.y,
             velocity: {applySpeedTo: 'y', negative: false}
         },
         // 3 lanes spawning from the bottom
         {
-            spawnx: centerLaneBottom.x + 100,
+            spawnx: centerLaneBottom.x + Main.Config.moveDistance,
             spawny: centerLaneBottom.y,
             velocity: {applySpeedTo: 'y', negative: true}
         },
@@ -81,7 +81,7 @@ var DiscLoop = function (game, discManager, score) {
             velocity: {applySpeedTo: 'y', negative: true}
         },
         {
-            spawnx: centerLaneBottom.x - 100,
+            spawnx: centerLaneBottom.x - Main.Config.moveDistance,
             spawny: centerLaneBottom.y,
             velocity: {applySpeedTo: 'y', negative: true}
         },

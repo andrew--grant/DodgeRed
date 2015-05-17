@@ -1,4 +1,4 @@
-var Configuration = function (game) {
+var Configuration = function (game, moveDistance) {
     this.game = game;
     return {
         sprites: {
@@ -34,16 +34,17 @@ var Configuration = function (game) {
         backgroundColor: 0xffffff,
         fontColor: "#fff200",
         fontFace: "Revalia",
+        moveDistance: moveDistance,
         collectSpawnLocations: [
-            [this.game.width / 2 - 100, this.game.height / 2 - 100],
-            [this.game.width / 2, this.game.height / 2 - 100],
-            [this.game.width / 2 + 100, this.game.height / 2 - 100],
-            [this.game.width / 2 - 100, this.game.height / 2],
+            [this.game.width / 2 - moveDistance, this.game.height / 2 - moveDistance],
+            [this.game.width / 2, this.game.height / 2 - moveDistance],
+            [this.game.width / 2 + moveDistance, this.game.height / 2 - moveDistance],
+            [this.game.width / 2 - moveDistance, this.game.height / 2],
             [this.game.width / 2, this.game.height / 2],
-            [this.game.width / 2 + 100, this.game.height / 2],
-            [this.game.width / 2 - 100, this.game.height / 2 + 100],
-            [this.game.width / 2, this.game.height / 2 + 100],
-            [this.game.width / 2 + 100, this.game.height / 2 + 100]
+            [this.game.width / 2 + moveDistance, this.game.height / 2],
+            [this.game.width / 2 - moveDistance, this.game.height / 2 + moveDistance],
+            [this.game.width / 2, this.game.height / 2 + moveDistance],
+            [this.game.width / 2 + moveDistance, this.game.height / 2 + moveDistance]
         ]
     };
 };

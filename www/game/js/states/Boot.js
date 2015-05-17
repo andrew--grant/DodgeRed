@@ -6,7 +6,7 @@ Main.Boot = function (game) {
 
 Main.Boot.prototype = {
     preload: function () {
-        Main.Config = Configuration(this.game);
+        Main.Config = Configuration(this.game, 150);
         Main.hammer = new Hammer(this.game.canvas);
     },
 

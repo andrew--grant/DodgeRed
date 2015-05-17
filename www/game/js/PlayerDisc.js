@@ -7,8 +7,7 @@ var PlayerDisc = function (x, y, game, score) {
     this.score = score;
     this.game.add.existing(this);
     this.anchor.setTo(0.5, 0.5);
-    this.scale.set(.8, .8);
-    this.moveDistance = 100;
+    this.scale.set(.4, .4);
     this.inputDisabled = false;
     this.leftMostMove = Main.Config.collectSpawnLocations[0][0];
     this.rightMostMove = Main.Config.collectSpawnLocations[5][0];
@@ -49,25 +48,26 @@ PlayerDisc.prototype.doTween = function (spriteRef, tweenProps) {
 
 PlayerDisc.prototype.panned = function (direction, spriteRef) {
     // left 2, right 4, up 8, down 16
+    console.log("dir " + direction);
     switch (direction) {
         case 2:
             if (!(spriteRef.x == this.leftMostMove)) {
-                this.doTween(spriteRef, {x: spriteRef.x - spriteRef.moveDistance});
+                this.doTween(spriteRef, {x: spriteRef.x - Main.Config.moveDistance});
             }
             break;
         case 4 :
             if (!(spriteRef.x == this.rightMostMove)) {
-                this.doTween(spriteRef, {x: spriteRef.x + spriteRef.moveDistance});
+                this.doTween(spriteRef, {x: spriteRef.x + Main.Config.moveDistance});
             }
             break;
         case 8:
             if (!(spriteRef.y == this.topMostMove)) {
-                this.doTween(spriteRef, {y: spriteRef.y - spriteRef.moveDistance});
+                this.doTween(spriteRef, {y: spriteRef.y - Main.Config.moveDistance});
             }
             break;
         case 16 :
             if (!(spriteRef.y == this.bottomMostMove)) {
-                this.doTween(spriteRef, {y: spriteRef.y + spriteRef.moveDistance});
+                this.doTween(spriteRef, {y: spriteRef.y + Main.Config.moveDistance});
             }
             break;
     }
@@ -78,22 +78,22 @@ PlayerDisc.prototype.move = function (key, spriteRef) {
     switch (key.keyCode) {
         case Phaser.Keyboard.LEFT:
             if (!(spriteRef.x == this.leftMostMove)) {
-                this.doTween(spriteRef, {x: spriteRef.x - spriteRef.moveDistance});
+                this.doTween(spriteRef, {x: spriteRef.x - Main.Config.moveDistance});
             }
             break;
         case Phaser.Keyboard.RIGHT :
             if (!(spriteRef.x == this.rightMostMove)) {
-                this.doTween(spriteRef, {x: spriteRef.x + spriteRef.moveDistance});
+                this.doTween(spriteRef, {x: spriteRef.x + Main.Config.moveDistance});
             }
             break;
         case Phaser.Keyboard.UP:
             if (!(spriteRef.y == this.topMostMove)) {
-                this.doTween(spriteRef, {y: spriteRef.y - spriteRef.moveDistance});
+                this.doTween(spriteRef, {y: spriteRef.y - Main.Config.moveDistance});
             }
             break;
         case Phaser.Keyboard.DOWN :
             if (!(spriteRef.y == this.bottomMostMove)) {
-                this.doTween(spriteRef, {y: spriteRef.y + spriteRef.moveDistance});
+                this.doTween(spriteRef, {y: spriteRef.y + Main.Config.moveDistance});
             }
             break;
     }

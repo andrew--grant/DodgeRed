@@ -8,6 +8,7 @@ var Disc = function (game, x, y, trailManager, playerDisc) {
     this.playerDisc = playerDisc;
     this.game = game;
     this.startTrailCounterLoop();
+    this.scale.set(.6, .6);
     this.anchor.setTo(0.5, 0.5);
     this.checkWorldBounds = true;
     this.outOfBoundsKill = true;

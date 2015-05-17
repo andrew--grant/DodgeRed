@@ -11,7 +11,7 @@ TrailManager.prototype.add = function (x, y) {
     trailSprite.anchor.setTo(0.5, 0.5);
     trailSprite.alpha = .2;
     var tween = this.game.add.tween(trailSprite)
-        .to({alpha: 0}, 1400, Phaser.Easing.Linear.None, true);
+        .to({alpha: 0}, 500, Phaser.Easing.Linear.None, true);
     tween.onComplete.add(function () {
         trailSprite.exists = false;
     }, this);

@@ -3,8 +3,7 @@ Main.Game = function (game) {
 };
 
 Main.Game.prototype = {
-
-    // todo: shorter trails
+    // todo: loop through until a new rand pos occurs!!!
     // todo: score anim??
     // todo: ai tweaks
     // todo: remove top status bar on ios
