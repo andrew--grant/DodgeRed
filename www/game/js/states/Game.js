@@ -14,6 +14,8 @@ Main.Game = function (game) {
 
 Main.Game.prototype = {
     create: function () {
+
+        console.log(Main.device);
         this.stopped = false;
         this.game.physics.startSystem(Phaser.Physics.ARCADE);
         var bgGradient = new BackgroundGradient(this.game, "#0054a6", "#66ccff");
