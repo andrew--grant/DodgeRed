@@ -5,8 +5,8 @@ Main.Game = function (game) {
     this.game.stop = function (disc, playerDisc) {
         if (!self.stopped) {
             self.stopped = true;
-            var impact = new Impact(this.game, disc, playerDisc);
-            impact.show();
+            var crash = new Crash(this.game, disc, playerDisc);
+            crash.show();
 
         }
     };
