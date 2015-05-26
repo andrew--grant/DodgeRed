@@ -11,22 +11,30 @@ var Collect = function (x, y, collectManager) {
     this.anchor.setTo(0.5, 0.5);
     this.animations.add('collectanim', [1, 2, 3, 4]);
     this.collectActions = new CollectActions(game);
+    this.stopped = false;
 };
 
 Collect.prototype = Object.create(Phaser.Sprite.prototype);
 Collect.prototype.constructor = Collect;
 
-Collect.prototype.update = function (spriteRef, tweenProps) {
+Collect.prototype.update = function (spriteRef, tweenProps) {//TODO: REMOVE TWEENPROPS
     var self = this;
-    this.angle += 2;
-    if (this.scale.x < 1) {
-        this.scale.setTo(this.scale.x + .2, this.scale.y + .2);
-    }
-    this.game.physics.arcade.overlap(this, this.playerDisc, function () {
-        self.collectActions.showPointsAndAnimate(1, self,self.collectManager, function () {
-            self.playerDisc.score.updateScore(1);
-        });
+    if (!this.stopped) {
+        this.angle += 2;
+        if (this.scale.x < 1) {
+            this.scale.setTo(this.scale.x + .2, this.scale.y + .2);
+        }
+        this.game.physics.arcade.overlap(this, this.playerDisc, function () {
+            self.collectActions.showPointsAndAnimate(1, self, self.collectManager, function () {
+                self.playerDisc.score.updateScore(1);
+            });
 
-    });
+        });
+    }
+};
+
+Collect.prototype.stop = function () {
+    this.stopped = true;
+    this.collectActions.stop();
 };
 

@@ -3,25 +3,7 @@ var DiscManager = function (playerDisc, game) {
     this.playerDisc = playerDisc
     this.discGroup = this.game.add.group();
     this.trailManager = new TrailManager(game);
-    //this.padding = 20;
-    //this.colWidth = 155; // + this.padding;
-    //this.yCenter = this.game.height / 2;
-    //this.yLeft = this.yCenter - this.colWidth;
-    //this.yRight = this.yCenter + this.colWidth;
-    //this.xCenter = this.game.width / 2;
-    //this.xLeft = this.xCenter - this.colWidth;
-    //this.xRight = this.xCenter + this.colWidth;
     this.discSpeed = 400;
-};
-
-DiscManager.prototype.startAttacking = function () {
-    this.game.time.events.loop(2000, function () {
-        var disc = this.getFromGroup();
-        disc.exists = true;
-        disc.body.velocity.y = this.discSpeed;
-        disc.x = this.game.width / 2;
-        disc.y = -50;
-    }, this);
 };
 
 DiscManager.prototype.getFromGroup = function () {
@@ -36,4 +18,9 @@ DiscManager.prototype.getFromGroup = function () {
 
 DiscManager.prototype.increaseSpeedBy = function (speed) {
     this.speed = speed;
+};
+
+DiscManager.prototype.stop = function (speed) {
+    this.discGroup.setAll("body.velocity.x", 0);
+    this.discGroup.setAll("body.velocity.y", 0);
 };

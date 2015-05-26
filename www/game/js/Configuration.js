@@ -10,6 +10,14 @@ var Configuration = function (game, moveDistance) {
                 key: 'disc',
                 path: 'game/assets/disc.png'
             },
+            emitBlack: {
+                key: 'emitBlack',
+                path: 'game/assets/emit-black.png'
+            },
+            emitWhite: {
+                key: 'emitWhite',
+                path: 'game/assets/emit-white.png'
+            },
             grid: {
                 key: 'grid',
                 path: 'game/assets/grid.png'

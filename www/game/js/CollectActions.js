@@ -7,6 +7,8 @@ var CollectActions = function (game) {
     this.anchor.setTo(0.5, 0.5);
     this.game.add.existing(this);
     this.executingPopover = false;
+    this.stopped = false;
+    this.collectTween = this.game.add.tween(this);
 };
 
 CollectActions.prototype = Object.create(Phaser.Text.prototype);
@@ -21,15 +23,22 @@ CollectActions.prototype.showPointsAndAnimate = function (pointsEarned, collectO
         self.executingPopover = true;
         collectObj.play('collectanim', 20, false, true);
         callback(pointsEarned);
-        var tween = this.game.add.tween(this)
-            .to({y: this.y - 30}, 150, "Linear", false)
-            .to({alpha: 0}, 350, "Linear", false).start();
-        tween.onComplete.add(function () {
+        self.collectTween.to({y: this.y - 30}, 150, "Linear", false)
+            .to({alpha: 0}, 350, "Linear", false);
+        self.collectTween.start();
+        self.collectTween.onComplete.add(function () {
             // wait a moment, spawn another
             game.time.events.add(500, function () {
-                collectManager.start();
+                if (!self.stopped) {
+                    collectManager.start();
+                }
             }, this);
             self.executingPopover = false;
         });
     }
 };
+
+CollectActions.prototype.stop = function () {
+    this.stopped = true;
+
+}

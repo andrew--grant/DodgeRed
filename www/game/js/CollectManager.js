@@ -3,6 +3,7 @@ var CollectManager = function (playerDisc, game) {
     this.playerDisc = playerDisc;
     this.waitTime = 3000;
     this.lastSpawnPos = [0, 0];
+    this.collect = null;
 };
 
 CollectManager.prototype.getRandomPosition = function () {
@@ -24,19 +25,28 @@ CollectManager.prototype.getRandomPosition = function () {
 };
 
 CollectManager.prototype.start = function () {
-    var pos = this.getRandomPosition();
-    console.log(pos);
-    if (pos[0] == this.lastSpawnPos[0] && pos[1] == this.lastSpawnPos[1]) {
-        // random location same as last, lets
-        // avoid a respawn in the same location
-        console.log("tried a second time, and used..");
-        var newPos = this.getRandomPosition();
-        console.log(newPos);
-        new Collect(newPos[0], newPos[1], this);
-        this.lastSpawnPos = pos;
-        return;
+
+    var pos = null;
+    if (this.playerDisc.score.getScore() == 0) {
+        pos = [771, 1104]; // todo: consider alternate start pos, eg; random but not centre
+    } else {
+        pos = this.getRandomPosition();
+    }
+
+    for (var i = 0; i < 100; i++) {
+        if (pos[0] == this.lastSpawnPos[0] && pos[1] == this.lastSpawnPos[1]) {
+            pos = this.getRandomPosition();
+            console.log("pos " + pos);
+        }
+        else {
+            this.collect = new Collect(pos[0], pos[1], this);
+            this.lastSpawnPos = pos;
+            break;
+        }
     }
     this.lastSpawnPos = pos;
-    new Collect(pos[0], pos[1], this);
 };
 
+CollectManager.prototype.stop = function () {
+    this.collect.stop();
+};

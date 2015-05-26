@@ -28,8 +28,19 @@ Disc.prototype.update = function () {
     var self = this;
     this.game.physics.arcade.overlap(this, this.playerDisc, function () {
         //self.game.state.start('gameOver');
+        self.game.stop(self, self.playerDisc);
     });
 };
+
+Disc.prototype.explode = function (doExplode) {
+    doExplode();
+};
+
+Disc.prototype.stop = function () {
+    this.body.velocity.x = 0;
+    this.body.velocity.y = 0;
+};
+
 
 Disc.prototype.startTrailCounterLoop = function () {
     this.timerLoop = this.game.time.events.loop(50, function () {
