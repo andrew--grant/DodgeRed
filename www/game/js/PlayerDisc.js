@@ -6,8 +6,12 @@ var PlayerDisc = function (x, y, game, score) {
     this.game.physics.arcade.enable(this);
     this.score = score;
     this.game.add.existing(this);
+    this.isNimble = false;
+    this.isCurrentlyMoving = false;
     this.anchor.setTo(0.5, 0.5);
-    this.scale.set(.4, .4);
+    this.scaleDefault = .55;
+    this.scaleNimble = .25;
+    this.scale.set(this.scaleDefault, this.scaleDefault);
     this.inputDisabled = false;
     this.leftMostMove = Main.Config.collectSpawnLocations[0][0];
     this.rightMostMove = Main.Config.collectSpawnLocations[5][0];
@@ -15,6 +19,10 @@ var PlayerDisc = function (x, y, game, score) {
     this.bottomMostMove = Main.Config.collectSpawnLocations[7][1];
     this.stopped = false;
     this.moveTween = null;
+    this.swooshSound = Main.swoosh;
+    this.tweenSpeedDefault = 200;
+    this.tweenSpeedNimble = 50;
+    this.tweenSpeed = this.tweenSpeedDefault;
     var self = this;
     this.game.input.keyboard.onDownCallback = function (e) {
         self.move(e, self);
@@ -28,27 +36,59 @@ var PlayerDisc = function (x, y, game, score) {
 PlayerDisc.prototype = Object.create(Phaser.Sprite.prototype);
 PlayerDisc.prototype.constructor = PlayerDisc;
 
-PlayerDisc.prototype.update = function () {
-};
-
 PlayerDisc.prototype.explode = function (doExplode) {
     doExplode();
 };
 
+PlayerDisc.prototype.scaleForNimble = function () {
+    this.nimbleTween = this.game.add.tween(this.scale);
+    this.nimbleTween.to({
+        x: this.scaleNimble,
+        y: this.scaleNimble
+    });
+    this.nimbleTween.easing(Phaser.Easing.Back.Out);
+    this.nimbleTween.start();
+    this.tweenSpeed = this.tweenSpeedNimble;
+};
+
+PlayerDisc.prototype.scaleForNormal = function () {
+    // guard for 'Cannot read property 'add' of null'
+    if (this.game != null) {
+        this.nimbleTween = this.game.add.tween(this.scale);
+        this.nimbleTween.to({
+            x: this.scaleDefault,
+            y: this.scaleDefault
+        });
+        this.nimbleTween.easing(Phaser.Easing.Back.Out);
+        this.nimbleTween.start();
+        this.tweenSpeed = this.tweenSpeedDefault;
+    }
+};
+
 PlayerDisc.prototype.stop = function () {
     this.stopped = true;
-    if(this.moveTween != null){
+    if (this.moveTween != null) {
         this.moveTween.stop();
     }
 };
 
+PlayerDisc.prototype.goNimble = function () {
+    var nimble = new Nimble(this.game, this);
+    nimble.startNimble(15);
+};
+
 PlayerDisc.prototype.doTween = function (spriteRef, tweenProps) {
     var self = this;
+    if (!self.isCurrentlyMoving) {
+        self.swooshSound.play();
+    }
+    this.isCurrentlyMoving = true;
     if (!self.inputDisabled) {
         self.inputDisabled = true;
         self.moveTween = this.game.add.tween(spriteRef);
-        self.moveTween.to(tweenProps, 200).onComplete.add(function () {
+        self.moveTween.to(tweenProps, this.tweenSpeed).onComplete.add(function () {
             self.inputDisabled = false;
+            self.isCurrentlyMoving = false;
         });
         self.moveTween.easing(Phaser.Easing.Back.Out);
         self.moveTween.start();
@@ -81,8 +121,6 @@ PlayerDisc.prototype.panned = function (direction, spriteRef) {
                 break;
         }
     }
-
-
 };
 
 PlayerDisc.prototype.move = function (key, spriteRef) {

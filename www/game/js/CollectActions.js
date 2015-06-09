@@ -23,16 +23,11 @@ CollectActions.prototype.showPointsAndAnimate = function (pointsEarned, collectO
         self.executingPopover = true;
         collectObj.play('collectanim', 20, false, true);
         callback(pointsEarned);
-        self.collectTween.to({y: this.y - 30}, 150, "Linear", false)
+        self.collectTween.to({y: this.y - 30}, 250, "Linear", false)
             .to({alpha: 0}, 350, "Linear", false);
         self.collectTween.start();
         self.collectTween.onComplete.add(function () {
-            // wait a moment, spawn another
-            game.time.events.add(500, function () {
-                if (!self.stopped) {
-                    collectManager.start();
-                }
-            }, this);
+            collectManager.showCollect();
             self.executingPopover = false;
         });
     }
@@ -40,5 +35,4 @@ CollectActions.prototype.showPointsAndAnimate = function (pointsEarned, collectO
 
 CollectActions.prototype.stop = function () {
     this.stopped = true;
-
 }

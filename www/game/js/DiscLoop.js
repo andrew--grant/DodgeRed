@@ -93,16 +93,13 @@ DiscLoop.prototype.stop = function () {
     this.game.time.events.remove(this.discLoop);
 };
 DiscLoop.prototype.start = function () {
-    // todo: investigate best way to speed up the loop
     this.discLoop = this.game.time.events.loop(this.loopDuration, function () {
-
         // Difficulty:
         // Decrease greater than odds
         // increase speed (gradually over the 3 disc spawn points)
         // increase loop duration
         // decrease spawn delays
         // send random fast discs
-
         var score = this.score.getScore();
         if (score % 10 === 0 && score > 0) {
             if (this.lastScoreLoggedInLoop !== score) {
@@ -111,7 +108,6 @@ DiscLoop.prototype.start = function () {
                     this.greaterThan -= 1;
                     this.spawnDelay -= 10;
                     this.difficultyLevel += 1;
-                    console.log("dificulty level is: " + this.difficultyLevel);
                 }
                 this.lastScoreLoggedInLoop = score;
             }
@@ -175,30 +171,26 @@ DiscLoop.prototype.start = function () {
         }, this);
 
 
-        //var timer = game.time.events.add(this.spawnDelay + 400, function () {
-        //    var rand4 = this.game.rnd.integerInRange(0, 10) >= this.greaterThan;
-        //    if (rand4) {
-        //        randomLane = this.game.rnd.integerInRange(0, 11);
-        //        var disc4 = this.discManager.getFromGroup();
-        //        disc4.exists = true;
-        //        if (this.lanes[randomLane].velocity.applySpeedTo == "x") {
-        //            this.lanes[randomLane].velocity.negative == true ?
-        //                disc4.body.velocity.x = -this.speed : disc4.body.velocity.x = this.speed;
-        //            disc4.body.velocity.y = 0;
-        //        } else {
-        //            this.lanes[randomLane].velocity.negative == true ?
-        //                disc4.body.velocity.y = -this.speed : disc4.body.velocity.y = this.speed;
-        //            disc4.body.velocity.x = 0;
-        //        }
-        //        disc4.x = this.lanes[randomLane].spawnx;
-        //        disc4.y = this.lanes[randomLane].spawny;
-        //
-        //    }
-        //}, this);
+        var timer = game.time.events.add(this.spawnDelay + 400, function () {
+            var rand4 = this.game.rnd.integerInRange(0, 10) >= this.greaterThan;
+            if (rand4) {
+                randomLane = this.game.rnd.integerInRange(0, 11);
+                var disc4 = this.discManager.getFromGroup();
+                disc4.exists = true;
+                if (this.lanes[randomLane].velocity.applySpeedTo == "x") {
+                    this.lanes[randomLane].velocity.negative == true ?
+                        disc4.body.velocity.x = -this.speed : disc4.body.velocity.x = this.speed;
+                    disc4.body.velocity.y = 0;
+                } else {
+                    this.lanes[randomLane].velocity.negative == true ?
+                        disc4.body.velocity.y = -this.speed : disc4.body.velocity.y = this.speed;
+                    disc4.body.velocity.x = 0;
+                }
+                disc4.x = this.lanes[randomLane].spawnx;
+                disc4.y = this.lanes[randomLane].spawny;
 
-
-        // low chance fast disc
-        // ....
+            }
+        }, this);
 
 
     }, this);

@@ -30,6 +30,14 @@ var Configuration = function (game, moveDistance) {
                 key: 'collect',
                 path: 'game/assets/collect-spritesheet.png'
             },
+            collectAlt: {
+                key: 'collectAlt',
+                path: 'game/assets/collect-spritesheet-alt.png'
+            },
+            pauseButton:{
+                key: 'pauseButton',
+                path: 'game/assets/pause-button.png'
+            },
             loadingBar: {
                 key: 'loadingBar',
                 path: 'game/assets/loading-bar.png'
@@ -37,6 +45,10 @@ var Configuration = function (game, moveDistance) {
             loadingBackground: {
                 key: 'loadingBackground',
                 path: 'game/assets/loading-background.png'
+            },
+            crash: {
+                key: 'crash',
+                path: 'game/assets/crash.png'
             }
         },
         backgroundColor: 0xffffff,
