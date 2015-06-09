@@ -5,7 +5,7 @@ var BackgroundGradient = function (game, colorStop1, colorStop2) {
     var h = this.game.height;
     var w = this.game.width;
     this.bmp = this.game.add.bitmapData(w, h);
-    var grd = this.bmp.context.createLinearGradient(0, 0, 0, 800);
+    var grd = this.bmp.context.createLinearGradient(0, 0, 0, 1700);
     grd.addColorStop(0, colorStop1);
     grd.addColorStop(1, colorStop2);
     this.bmp.context.fillStyle = grd;

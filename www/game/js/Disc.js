@@ -2,11 +2,11 @@
 
 var Disc = function (game, x, y, trailManager, playerDisc) {
     Phaser.Sprite.call(this, game, x, y, Main.Config.sprites.disc.key);
-    this.game.physics.arcade.enable(this);
+    this.game = game;
+    game.physics.arcade.enable(this);
     this.playerDisc = playerDisc;
     this.trailManager = trailManager;
     this.playerDisc = playerDisc;
-    this.game = game;
     this.startTrailCounterLoop();
     this.scale.set(.6, .6);
     this.anchor.setTo(0.5, 0.5);
