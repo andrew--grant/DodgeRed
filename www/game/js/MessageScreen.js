@@ -1,5 +1,7 @@
 'use strict';
 
+
+// todo: update objects to 'MessageScreen' due to git issue
 var MessageOverlay = function (game, fillColor, x, y, width, height, textx, texty, textSize) {
     this.game = game;
     console.log(game);
