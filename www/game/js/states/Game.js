@@ -13,7 +13,6 @@ Main.Game = function (game) {
 
 Main.Game.prototype = {
     create: function () {
-        console.log(Main.device.getHighScore());
         this.stopped = false;
         this.game.physics.startSystem(Phaser.Physics.ARCADE);
         var bgGradient = new BackgroundGradient(this.game, "#0054a6", "#66ccff");

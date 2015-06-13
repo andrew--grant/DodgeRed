@@ -14,7 +14,6 @@ Crash.prototype.show = function () {
     var tweenDuration = 6000;//150;
     var scaleFactor = .6;
     var easing = "Linear";
-    console.log(this);
     this.playerDisc.stop();
     var self = this;
     this.playerDisc.explode(function () {
@@ -24,9 +23,6 @@ Crash.prototype.show = function () {
         crash1.animations.add('anim', [0, 1, 2, 3, 4], false);
         crash1.animations.play('anim', 50, null, true);
         crash1.anchor.setTo(0.5, 0.5);
-        console.log("x "+ self.playerDisc.x);
-        console.log("y "+ self.playerDisc.y);
-
         var t1 = self.game.add.tween(self.playerDisc);
         t1.to({alpha: 0}, 40, easing, false);
         t1.start();
@@ -46,8 +42,8 @@ Crash.prototype.show = function () {
     });
     // Game Over
     var timer = self.game.time.events.add(3000, function () {
-        var messageOverlay = new MessageOverlay(self.game, 0x0054a6, 0, 1500, self.game.width, 400, 130, 90, 150);
-        messageOverlay.addTextContent("Try Again!",
+        var messageScreen = new MessageScreen(self.game, 0x0054a6, 0, 1500, self.game.width, 400, 130, 90, 150);
+        messageScreen.addTextContent("Try Again!",
             null,
             function () {
                 self.game.state.start('game');

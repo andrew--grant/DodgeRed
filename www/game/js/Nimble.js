@@ -4,7 +4,7 @@ var Nimble = function (game, playerDisc) {
     this.playerDisc = playerDisc;
     this.game = game;
     this.timer = null;
-    this.messageOverlay = null;
+    this.messageScreen = null;
 };
 
 Nimble.prototype.constructor = Nimble;
@@ -14,11 +14,11 @@ Nimble.prototype.startNimble = function (seconds) {
     this.playerDisc.swooshSound = Main.swooshNimble;
     var cnt = seconds;
     var msg = "ride like the wind!\n";
-    this.messageOverlay = new MessageOverlay(this.game, 0x0054a6, 0, 1500, game.width, 400, 110, 90, 90);
-    this.messageOverlay.addTextContent(msg + cnt--, null);
+    this.messageScreen = new MessageScreen(this.game, 0x0054a6, 0, 1500, this.game.width, 400, 110, 90, 90);
+    this.messageScreen.addTextContent(msg + cnt--, null);
     var myLoop = this.game.time.events.loop(1000, function () {
         if (cnt != seconds) {
-            this.messageOverlay.updateTextContent(msg + cnt--);
+            this.messageScreen.updateTextContent(msg + cnt--);
         }
         if (cnt == -1) {
             this.endNimble();
@@ -30,6 +30,6 @@ Nimble.prototype.startNimble = function (seconds) {
 Nimble.prototype.endNimble = function () {
     this.playerDisc.scaleForNormal();
     this.playerDisc.swooshSound = Main.swoosh;
-    this.messageOverlay.removeOverlay();
+    this.messageScreen.removeOverlay();
 };
 

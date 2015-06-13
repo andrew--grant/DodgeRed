@@ -11,13 +11,11 @@ Main.Preloader.prototype = {
     },
 
     create: function () {
-        game.load.onLoadStart.add(this.loadStart, this);
-        game.load.onFileComplete.add(this.fileComplete, this);
-        game.load.onLoadComplete.add(this.loadComplete, this);
+        this.game.load.onLoadStart.add(this.loadStart, this);
+        this.game.load.onFileComplete.add(this.fileComplete, this);
+        this.game.load.onLoadComplete.add(this.loadComplete, this);
         this.start();
     },
-
-    //todo: collected a nimble while still had nimble! fix
 
     start: function () {
         // audio
@@ -52,15 +50,12 @@ Main.Preloader.prototype = {
     },
 
     loadStart: function () {
-        console.log("loadStart");
     },
 
     fileComplete: function (progress, cacheKey, success, totalLoaded, totalFiles) {
-        console.log("File Complete: " + progress + "% - " + totalLoaded + " out of " + totalFiles + " status is " + success);
     },
 
     loadComplete: function () {
-        console.log("progress: " + this.game.load.progress);
         // wait for for fonts to be active
         // (the loader loads the script only)
         game.time.events.loop(500, function () {
@@ -94,7 +89,6 @@ var device = {
     },
     // Update DOM on a Received Event
     receivedEvent: function (id) {
-        console.log('Received Event -> ' + id);
     },
     //save high score to local storage
     setHighScore: function (score) {

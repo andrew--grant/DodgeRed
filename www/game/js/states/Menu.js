@@ -7,11 +7,9 @@ Main.Menu = function (game) {
 Main.Menu.prototype = {
 
     create: function () {
-        console.log("1");
         var bgGradient = new BackgroundGradient(this.game, "#0054a6", "#66ccff");
         bgGradient.add();
-        console.log("2");
-        this.text = game.add.text(game.world.centerX, game.world.centerY, "Start Game", {
+        this.text = this.game.add.text(game.world.centerX, game.world.centerY, "Start Game", {
             font: "120px " + Main.Config.fontFace,
             fill: Main.Config.fontColor,
             align: "center"

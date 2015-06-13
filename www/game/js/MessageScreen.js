@@ -1,10 +1,8 @@
 'use strict';
 
 
-// todo: update objects to 'MessageScreen' due to git issue
-var MessageOverlay = function (game, fillColor, x, y, width, height, textx, texty, textSize) {
+var MessageScreen = function (game, fillColor, x, y, width, height, textx, texty, textSize) {
     this.game = game;
-    console.log(game);
     this.fillColor = fillColor;
     this.gfx = game.add.graphics(0, 0);
     this.overlayGroup = null;
@@ -19,7 +17,7 @@ var MessageOverlay = function (game, fillColor, x, y, width, height, textx, text
 };
 
 
-MessageOverlay.prototype.addTextContent = function (textContent, onTweenComplete, onTextDown) {
+MessageScreen.prototype.addTextContent = function (textContent, onTweenComplete, onTextDown) {
     var self = this;
     this.textContent = textContent;
     this.overlayGroup = this.game.add.group();
@@ -50,17 +48,17 @@ MessageOverlay.prototype.addTextContent = function (textContent, onTweenComplete
     }, self);
 };
 
-MessageOverlay.prototype.updateTextContent = function (textContent) {
+MessageScreen.prototype.updateTextContent = function (textContent) {
     var self = this;
     self.text.setText(textContent);
 
 };
 
-MessageOverlay.prototype.getTextContent = function () {
+MessageScreen.prototype.getTextContent = function () {
     return this.textContent;
 };
 
-MessageOverlay.prototype.removeOverlay = function () {
+MessageScreen.prototype.removeOverlay = function () {
     var self = this;
     var fadeTextOut = game.add.tween(this.overlayGroup)
     fadeTextOut.to({alpha:0}, 150, "Linear", false);

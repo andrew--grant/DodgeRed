@@ -24,15 +24,14 @@ var Score = function (game) {
         {font: "120px " + Main.Config.fontFace, fill: Main.Config.fontColor, align: "center"});
     this.pauseText.inputEnabled = true;
     this.pauseText.events.onInputDown.add(function () {
-        var messageOverlay = new MessageOverlay(this.game, 0x0054a6, 0, 1500, game.width, 400, 220, 90, 150);
-        messageOverlay.addTextContent("PAUSED", function () {
+        var messageScreen = new MessageScreen(this.game, 0x0054a6, 0, 1500, game.width, 400, 220, 90, 150);
+        messageScreen.addTextContent("PAUSED", function () {
             self.game.paused = true;
         });
         game.input.onDown.add(function (event) {
-            console.log("event.x --> " + event.x);
             if (event.x > posx + 1000 && event.x < posx + 1170 && event.y > posy && event.y < posy + 200) {
                 game.paused = false;
-                messageOverlay.removeOverlay();
+                messageScreen.removeOverlay();
             }
         }, self);
     }, self);
