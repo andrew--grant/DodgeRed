@@ -34,7 +34,7 @@ CollectManager.prototype.showCollect = function () {
         pos = this.getRandomPosition();
     }
     for (var i = 0; i < 100; i++) {
-        if (pos[0] == this.lastSpawnPos[0] && pos[1] == this.lastSpawnPos[1]) {
+        if (pos[0] == this.lastSpawnPos[0] || pos[1] == this.lastSpawnPos[1]) {
             // It may take a few tries, but we need to make sure
             // not to respawn in the same position as last time
             pos = this.getRandomPosition();

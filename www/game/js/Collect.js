@@ -32,7 +32,7 @@ Collect.prototype.update = function () {
         this.game.physics.arcade.overlap(this, this.playerDisc, function () {
             self.collectActions.showPointsAndAnimate(1, self, self.collectManager, function () {
                 self.playerDisc.score.updateScore(1);
-                if (self.isNimble) {
+                if (self.isNimble && !self.playerDisc.currentlyNimble) {
                     self.playerDisc.goNimble();
                 }
             });

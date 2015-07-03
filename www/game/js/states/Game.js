@@ -10,7 +10,11 @@ Main.Game = function (game) {
         }
     };
 };
-
+// todo: still need to resolve nimble collect when nimble is active!
+// todo: sounds not working on ios
+// todo: make pause overlay unpause
+// todo: ios background / foreground crash issue --> libGPUSupportMercury.dylib`gpus_ReturnUnexpectedKillClient:
+// todo: collect sounds
 Main.Game.prototype = {
     create: function () {
         this.stopped = false;

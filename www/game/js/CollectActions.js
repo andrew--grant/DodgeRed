@@ -20,6 +20,7 @@ CollectActions.prototype.showPointsAndAnimate = function (pointsEarned, collectO
     this.y = collectObj.y - 50;
     var self = this;
     if (!self.executingPopover) {
+        Main.collect.play();
         self.executingPopover = true;
         collectObj.play('collectanim', 20, false, true);
         callback(pointsEarned);

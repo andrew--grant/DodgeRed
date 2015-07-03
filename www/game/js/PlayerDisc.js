@@ -7,6 +7,7 @@ var PlayerDisc = function (x, y, game, score) {
     this.score = score;
     this.game.add.existing(this);
     this.isNimble = false;
+    this.currentlyNimble = false;
     this.isCurrentlyMoving = false;
     this.anchor.setTo(0.5, 0.5);
     this.scaleDefault = .55;
@@ -75,6 +76,11 @@ PlayerDisc.prototype.stop = function () {
 PlayerDisc.prototype.goNimble = function () {
     var nimble = new Nimble(this.game, this);
     nimble.startNimble(15);
+    this.currentlyNimble = true;
+};
+
+PlayerDisc.prototype.isSafe = function () {
+    return this.game.width / 2 == this.x && this.game.height / 2 == this.y;
 };
 
 PlayerDisc.prototype.doTween = function (spriteRef, tweenProps) {

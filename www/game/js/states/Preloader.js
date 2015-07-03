@@ -19,12 +19,14 @@ Main.Preloader.prototype = {
 
     start: function () {
         // audio
-        this.game.load.audio('swoosh', ['game/assets/swoosh.ogg']);
-        this.game.load.audio('swoosh-nimble', ['game/assets/swoosh-nimble.ogg']);
-        this.game.load.audio('explosion', ['game/assets/explosion.ogg']);
+        this.game.load.audio('swoosh', ['game/assets/audio/swoosh.ogg','game/assets/audio/swoosh.m4a']);
+        this.game.load.audio('swoosh-nimble', ['game/assets/audio/swoosh-nimble.ogg','game/assets/audio/swoosh-nimble.m4a']);
+        this.game.load.audio('explosion', ['game/assets/audio/explosion.ogg','game/assets/audio/explosion.m4a']);
+        this.game.load.audio('collect', ['game/assets/audio/collect1.ogg','game/assets/audio/collect1.m4a']);
         Main.swoosh = this.game.add.audio('swoosh');
         Main.swooshNimble = this.game.add.audio('swoosh-nimble');
         Main.explosion = this.game.add.audio('explosion');
+        Main.collect = this.game.add.audio('collect');
         // sprites
         this.game.load.spritesheet(Main.Config.sprites.pauseButton.key, Main.Config.sprites.pauseButton.path, 120, 135);
         this.game.load.image(Main.Config.sprites.playerDisc.key, Main.Config.sprites.playerDisc.path);

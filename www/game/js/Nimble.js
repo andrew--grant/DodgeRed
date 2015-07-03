@@ -22,6 +22,7 @@ Nimble.prototype.startNimble = function (seconds) {
         }
         if (cnt == -1) {
             this.endNimble();
+            this.playerDisc.currentlyNimble = false;
             this.game.time.events.remove(myLoop);
         }
     }, this);
@@ -32,4 +33,3 @@ Nimble.prototype.endNimble = function () {
     this.playerDisc.swooshSound = Main.swoosh;
     this.messageScreen.removeOverlay();
 };
-
